@@ -33,3 +33,10 @@ goto end
 
 :end
 popd
+
+:: ADDITIONS FOR GITHUB PAGES BELOW ::
+
+:: bring \docs\_build\html\ to parent \docs\ directory for consumption by github pages
+xcopy .\_build\html\ . /e /y /q
+echo.
+echo \docs\ files have been updated.
