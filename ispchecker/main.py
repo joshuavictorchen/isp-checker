@@ -1,7 +1,7 @@
-from audioop import add
 import requests
 import sys
 import warnings
+from abc import ABC, abstractmethod
 from cryptography.utils import CryptographyDeprecationWarning
 from ispchecker import tools as t
 
@@ -9,6 +9,7 @@ from ispchecker import tools as t
 warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
 
 DIVIDER = "\n ---------------------------------------"
+LJUST = 19
 
 
 def main():
@@ -18,14 +19,17 @@ def main():
     full_address = " ".join(sys.argv[1:])
 
     # instantiate an Address
-    a = Address(full_address)
+    a = Address()
+
+    # load in an address
+    print(DIVIDER)
+    a.parse_address(full_address)
     t.print_recursive_dict(a.address)
 
-    # check ISP offerings for that Address
-    # add more functions to this call stack as applicable
-    a.check_spectrum()
-    a.check_centurylink()
-    a.check_verizon_home_LTE()
+    # check for isps
+    print(DIVIDER)
+    print()
+    a.check_isps()
 
 
 class Address:
@@ -36,12 +40,12 @@ class Address:
 
     **Relevant instance attributes:** \n
         * **address** (*dict*): Dictionary of addresses.
-        * **isps** (*dict*): Dictionary of ISPs and offerings.
+        * **isps** (*dict*): Dictionary of instantiated ISPs.
     """
 
-    def __init__(self, full_address):
+    def __init__(self):
 
-        self.address = self.parse_address(full_address)
+        self.address = {}
         self.isps = {}
 
     def parse_address(self, full_address):
@@ -59,15 +63,52 @@ class Address:
             "zip": address_components[2].split()[1],
         }
 
-        return address_dict
+        self.address = address_dict
+        return self.address
 
-    def check_spectrum(self):
+    def check_isps(self):
 
-        # spectrum is a 2-step process
-        # first step required to get address and session metadata
-        # second step uses the metadata to get specific offerings
+        if self.address == {}:
+            print("\n Address is empty - please parse in an address first.")
+            return None
 
-        print("\n spectrum ... ", end="")
+        isps = {
+            "Spectrum": Spectrum(self.address),
+            "Verizon": Verizon(self.address),
+            # "CenturyLink": CenturyLink()
+        }
+
+        self.isps = isps
+        return isps
+
+
+class ISP(ABC):
+    def get_availability(self):
+        return self.available
+
+    def get_top_speed(self):
+        return self.top_speed
+
+    def get_metadata(self):
+        return self.metadata
+
+
+class Spectrum(ISP):
+    def __init__(self, address_dict: dict):
+
+        self.address = address_dict
+        self.top_speed = None
+        self.metadata = {}
+
+        # checking spectrum availability is a 2-step process:
+        #   1. get address metadata and session metadata
+        #   2. use this metadata to get specific offerings
+        print(" Spectrum ".ljust(LJUST, ".") + " ", end="")
+        r = self.retrieve_address_and_session_metadata()
+        self.available = self.parse_address_and_session_metadata(r)
+        print(self.available)
+
+    def retrieve_address_and_session_metadata(self):
 
         # spectrum endpoint for obtaining address and session metadata
         url = "https://location.spectrum.com/api-v2/svc/serviceability/v2"
@@ -92,79 +133,50 @@ class Address:
         }
 
         # post the request and obtain the response in dict form
-        response = requests.post(url, json=data, headers=headers).json()
+        response = requests.post(url, json=data, headers=headers)
 
-        # ASSUMING NO ERRORS FOR NOW
+        return response
+
+    def parse_address_and_session_metadata(self, response: requests.Response):
+
+        # error checking here
+
+        response = response.json()
+
         spectrum = [
             max(False, True if i.get("locationKey") else False)
             for i in response.get("addresses")
         ][0]
 
-        print(spectrum)
-        self.isps.update({"spectrum": spectrum})
-
-        # 2nd commented out - incorporate later
-        # note: sptoken doesn't work here, though it does via browser (more details TBD)
-
-        # serviceLocationId = response.get('addresses')[0].get('locationKey')
-        # sptoken = response.get('transactionId')
-
-        # url = "https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers"
-
-        # querystring = {"serviceLocationId":serviceLocationId}
-
-        # headers = {
-        #     "User-Agent": "",
-        #     "Accept": "*/*",
-        #     "Accept-Language": "en-US,en;q=0.5",
-        #     "Accept-Encoding": "gzip, deflate, br",
-        #     "session-id": sptoken,
-        #     "client-id": sptoken,
-        #     "Connection": "keep-alive",
-        # }
-
-        # response = requests.request("GET", url, headers=headers, params=querystring)
-
         return spectrum
 
-    def check_verizon_home_LTE(self):
+    # incorporate later
+    # note: sptoken doesn't work here, though it does via browser (more details TBD)
 
-        # verizon is a one-step process
+    # serviceLocationId = response.get('addresses')[0].get('locationKey')
+    # sptoken = response.get('transactionId')
 
-        print("\n verizon home LTE ... ", end="")
+    # url = "https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers"
 
-        # home LTE availability is encompassed in this endpoint
-        url = "https://www.verizon.com/vfw/v1/check5GAvailability"
+    # querystring = {"serviceLocationId":serviceLocationId}
 
-        # the following headers must be provided for the request to succeed
-        headers = {"User-Agent": ""}
+    # headers = {
+    #     "User-Agent": "",
+    #     "Accept": "*/*",
+    #     "Accept-Language": "en-US,en;q=0.5",
+    #     "Accept-Encoding": "gzip, deflate, br",
+    #     "session-id": sptoken,
+    #     "client-id": sptoken,
+    #     "Connection": "keep-alive",
+    # }
 
-        # json parameters for posting to the endpoint
-        data = {
-            "address1": self.address.get("street"),
-            "city": self.address.get("city"),
-            "state": self.address.get("state"),
-            "zipcode": self.address.get("zip"),
-        }
+    # response = requests.request("GET", url, headers=headers, params=querystring)
 
-        # post the request and obtain the response in dict form
-        response = requests.post(
-            url,
-            headers=headers,
-            json=data,
-        ).json()
 
-        # ASSUMING NO ERRORS FOR NOW
-        verizon_LTE = response.get("output").get("qualified4GHome")
-
-        print(verizon_LTE)
-        self.isps.update({"verizon-LTE": verizon_LTE})
-
-        return verizon_LTE
-
+class CenturyLink(ISP):
     def check_centurylink(self):
 
-        print("\n centurylink ... ", end="")
+        print(" CenturyLink ".ljust(LJUST, ".") + " ", end="")
 
         # get access token
         url = "https://shop.centurylink.com/uas/oauth"
@@ -233,6 +245,55 @@ class Address:
         mbps = response.get("offersList")[0].get("downloadSpeedMbps")
 
         print(mbps)
+
+
+class Verizon(ISP):
+    def __init__(self, address_dict: dict):
+
+        self.address = address_dict
+        self.top_speed = 50  # <-- parse from web later
+        self.metadata = {}
+
+        # verizon is a one-step process
+        print(" Verizon ".ljust(LJUST, ".") + " ", end="")
+        r = self.retrieve_plan_availability()
+        self.available = self.parse_plan_availability(r)
+        print(self.available)
+
+    def retrieve_plan_availability(self):
+
+        # home LTE availability is encompassed in this endpoint
+        url = "https://www.verizon.com/vfw/v1/check5GAvailability"
+
+        # the following headers must be provided for the request to succeed
+        headers = {"User-Agent": ""}
+
+        # json parameters for posting to the endpoint
+        data = {
+            "address1": self.address.get("street"),
+            "city": self.address.get("city"),
+            "state": self.address.get("state"),
+            "zipcode": self.address.get("zip"),
+        }
+
+        # post the request and obtain the response in dict form
+        response = requests.post(
+            url,
+            headers=headers,
+            json=data,
+        )
+
+        return response
+
+    def parse_plan_availability(self, response: requests.Response):
+
+        # error checking here
+
+        response = response.json()
+
+        verizon_LTE = response.get("output").get("qualified4GHome")
+
+        return verizon_LTE
 
 
 if __name__ == "__main__":

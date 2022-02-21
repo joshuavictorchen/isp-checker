@@ -44,6 +44,10 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">Overview</a></li>
 <li><a class="reference internal" href="#address">Address</a></li>
+<li><a class="reference internal" href="#isp">ISP</a></li>
+<li><a class="reference internal" href="#spectrum">Spectrum</a></li>
+<li><a class="reference internal" href="#verizon">Verizon</a></li>
+<li><a class="reference internal" href="#centurylink">CenturyLink</a></li>
 <li><a class="reference internal" href="#module-ispchecker.tools">Tools</a></li>
 </ul>
 </div>
@@ -81,7 +85,7 @@
 <h1>Address<a class="headerlink" href="#address" title="Permalink to this headline"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.Address">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Address</span></span><a class="headerlink" href="#ispchecker.main.Address" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Placeholder text.</p>
 <dl class="field-list simple">
@@ -93,7 +97,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p><strong>address</strong> (<em>dict</em>): Dictionary of addresses.</p></li>
-<li><p><strong>isps</strong> (<em>dict</em>): Dictionary of ISPs and offerings.</p></li>
+<li><p><strong>isps</strong> (<em>dict</em>): Dictionary of instantiated ISPs.</p></li>
 </ul>
 </div></blockquote>
 <dl class="py method">
@@ -102,18 +106,84 @@
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.main.Address.check_spectrum">
-<span class="sig-name descname"><span class="pre">check_spectrum</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address.check_spectrum" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.main.Address.check_isps">
+<span class="sig-name descname"><span class="pre">check_isps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address.check_isps" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="isp">
+<h1>ISP<a class="headerlink" href="#isp" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ispchecker.main.ISP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">ISP</span></span><a class="headerlink" href="#ispchecker.main.ISP" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_availability">
+<span class="sig-name descname"><span class="pre">get_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_availability" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.main.Address.check_verizon_home_LTE">
-<span class="sig-name descname"><span class="pre">check_verizon_home_LTE</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address.check_verizon_home_LTE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_top_speed">
+<span class="sig-name descname"><span class="pre">get_top_speed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_top_speed" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.main.Address.check_centurylink">
-<span class="sig-name descname"><span class="pre">check_centurylink</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address.check_centurylink" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_metadata">
+<span class="sig-name descname"><span class="pre">get_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_metadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="spectrum">
+<h1>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ispchecker.main.Spectrum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.main.ISP</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Spectrum.retrieve_address_and_session_metadata">
+<span class="sig-name descname"><span class="pre">retrieve_address_and_session_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum.retrieve_address_and_session_metadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Spectrum.parse_address_and_session_metadata">
+<span class="sig-name descname"><span class="pre">parse_address_and_session_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="verizon">
+<h1>Verizon<a class="headerlink" href="#verizon" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ispchecker.main.Verizon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Verizon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.main.ISP</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Verizon.retrieve_plan_availability">
+<span class="sig-name descname"><span class="pre">retrieve_plan_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon.retrieve_plan_availability" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Verizon.parse_plan_availability">
+<span class="sig-name descname"><span class="pre">parse_plan_availability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon.parse_plan_availability" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="centurylink">
+<h1>CenturyLink<a class="headerlink" href="#centurylink" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">CenturyLink</span></span><a class="headerlink" href="#ispchecker.main.CenturyLink" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.main.ISP</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.check_centurylink">
+<span class="sig-name descname"><span class="pre">check_centurylink</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.check_centurylink" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -187,7 +257,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2021, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-20 23:57:28.
+      <span class="lastupdated">Last updated on 2022-02-21 12:36:10.
       </span></p>
   </div>
 
