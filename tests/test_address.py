@@ -4,7 +4,7 @@ from ispchecker.main import Address
 STREET = "street"
 CITY = "city"
 STATE = "state"
-ZIP = "zip"
+ZIP = "12345"
 
 
 class TestAddress(unittest.TestCase):
@@ -21,11 +21,12 @@ class TestAddress(unittest.TestCase):
     def test_parse_address(self):
         # check that the address components have been parsed into the 'address' dict attribute
         self.assertTrue(
-            self.address.address["full_address"] == f"{STREET}, {CITY}, {STATE} {ZIP}"
+            self.address.address["full_address"]
+            == f"{STREET.upper()}, {CITY.upper()}, {STATE.upper()} {ZIP.upper()}"
         )
-        self.assertTrue(self.address.address["street"] == STREET)
-        self.assertTrue(self.address.address["city"] == CITY)
-        self.assertTrue(self.address.address["state"] == STATE)
+        self.assertTrue(self.address.address["street"] == STREET.upper())
+        self.assertTrue(self.address.address["city"] == CITY.upper())
+        self.assertTrue(self.address.address["state"] == STATE.upper())
         self.assertTrue(self.address.address["zip"] == ZIP)
 
 
