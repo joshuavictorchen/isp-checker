@@ -152,6 +152,17 @@
 <dt class="sig sig-object py" id="ispchecker.main.Spectrum.parse_address_and_session_metadata">
 <span class="sig-name descname"><span class="pre">parse_address_and_session_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>placeholder text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>requests.Response</em>) – _description_</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s1">&#39;transactionId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;rdofMatchLevel&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -215,17 +226,6 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>response</strong> (<em>requests.Response</em>) – _description_</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>_description_</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>_type_</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -245,7 +245,136 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.main.Verizon.parse_plan_availability">
 <span class="sig-name descname"><span class="pre">parse_plan_availability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon.parse_plan_availability" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>requests.Response</em>) – _description_</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">response</span> <span class="n">mapping</span> <span class="ow">is</span> <span class="n">incomplete</span><span class="p">)</span>
+
+<span class="p">{</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;qualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;reservation&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;emailAddress&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;addressLine1&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;addressLine2&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;zipCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;reasonCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;addressType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;installType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;floorToStreetsMap&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;phoneNumber&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;addressfromAccount&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;currentFloorNumber&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;eventCorrelationId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;verifyE911Address&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;polylines&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;launchType&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;apartmentNumberRequired&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;floorPlanAvailable&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;addressMapStatus&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;maxFloor&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;buildingDetails&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;uberPinEligible&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;intersectionCoordinatesLst&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;coveragePercentage&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;equipType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;addressDescriptorList&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;bundleNames&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;qualified4GHome&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;qualifiedCBand&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;preOrder5GFlow&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;preOrderLaunchDate&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;isExpiredCart&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isStreetSelected&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isRevisitor&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;uberPinQualificatioIsRequired&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;displayStreetSelection&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;mucOfferEligible&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;storeSessionId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;fiosQualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;HSI&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;fiosResponse&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;meta&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="nb">str</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;qualification&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;gigqualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;fiosqualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;hsiqualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;posturl&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;visitId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;visitorId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;commonLq&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;lbo&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                <span class="s1">&#39;captcha&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;postValues&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;campaignCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;addressInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;addressid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;addressLine1&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;addressLine2&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;zipCode&#39;</span><span class="p">:</span> <span class="nb">str</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;vendorName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;targetUrl&#39;</span><span class="p">:</span> <span class="nb">str</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;qualificationDetails&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;hoaServiceType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;qualified&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;services&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;pendingOrder&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;smartCartDetails&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;inService&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;hoaFlag&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;hoaContractNumber&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;isLennarEligible&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;tarCode&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;cpnelg&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;fiosSelfInstall&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;fiosReady&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;quantumEligible&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;parsedAddress&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;fiveG&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;addressNotFound&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;encryptedAddressFor5G&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;qualified4GHome&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;zip&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;isError&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;wirelessPlanType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;occupancyType&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;multipleAddressMatch&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+            <span class="s1">&#39;parsedAddress&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;errorMap&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;statusMessage&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;statusCode&#39;</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
 
 </dd></dl>
 
@@ -367,7 +496,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2021, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-21 17:14:46.
+      <span class="lastupdated">Last updated on 2022-02-21 17:49:46.
       </span></p>
   </div>
 

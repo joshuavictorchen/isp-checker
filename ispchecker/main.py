@@ -74,8 +74,8 @@ class Address:
 
         isps = {
             "Spectrum": Spectrum(self.address),
-            # "Verizon": Verizon(self.address),
             # "CenturyLink": CenturyLink(self.address),
+            "Verizon": Verizon(self.address),
         }
 
         self.isps = isps
@@ -106,7 +106,7 @@ class Spectrum(ISP):
         # retrieve address/session response
         r = self.retrieve_address_and_session_metadata()
 
-        # get dict from response and update self.metadata
+        # get dict from response, parse availability, and update self.metadata
         self.metadata.update(self.parse_address_and_session_metadata(r))
 
         print(self.available)
@@ -141,6 +141,12 @@ class Spectrum(ISP):
 
     def parse_address_and_session_metadata(self, response: requests.Response):
         """placeholder text
+
+        Args:
+            response (requests.Response): _description_
+
+        Returns:
+            _type_: _description_
 
         .. code-block::
 
@@ -205,12 +211,6 @@ class Spectrum(ISP):
                     'defaultMSO': str
                 }
             }
-
-        Args:
-            response (requests.Response): _description_
-
-        Returns:
-            _type_: _description_
         """
 
         # TODO: response status/error checking, robust conversion to dict, etc.
@@ -243,6 +243,7 @@ class Spectrum(ISP):
                     self.available = True
                 else:
                     self.available = False
+                    self.top_speed = 0
 
                 # availability has been determined, so response_dict can be returned now
                 return response_dict
@@ -428,13 +429,18 @@ class Verizon(ISP):
     def __init__(self, address_dict: dict):
 
         self.address = address_dict
-        self.top_speed = 50  # <-- parse from web later
+        self.available = "Undetermined"
+        self.top_speed = "Undetermined"
         self.metadata = {}
 
-        # verizon is a one-step process
         print(" Verizon ".ljust(LJUST, ".") + " ", end="")
+
+        # retrieve plan availability
         r = self.retrieve_plan_availability()
-        self.available = self.parse_plan_availability(r)
+
+        # get dict from response, parse availability, and update self.metadata
+        self.metadata.update(self.parse_plan_availability(r))
+
         print(self.available)
 
     def retrieve_plan_availability(self):
@@ -463,14 +469,152 @@ class Verizon(ISP):
         return response
 
     def parse_plan_availability(self, response: requests.Response):
+        """_summary_
 
-        # error checking here
+        Args:
+            response (requests.Response): _description_
 
-        response = response.json()
+        Returns:
+            _type_: _description_
 
-        verizon_LTE = response.get("output").get("qualified4GHome")
+        .. code-block::
 
-        return verizon_LTE
+            (response mapping is incomplete)
+
+            {
+                'output': {
+                    'qualified': bool,
+                    'reservation': TBD,
+                    'emailAddress': TBD,
+                    'addressLine1': str,
+                    'addressLine2': str,
+                    'city': str,
+                    'state': str,
+                    'zipCode': str,
+                    'reasonCode': str,
+                    'addressType': TBD,
+                    'installType': TBD,
+                    'floorToStreetsMap': {},
+                    'phoneNumber': TBD,
+                    'addressfromAccount': bool,
+                    'currentFloorNumber': TBD,
+                    'eventCorrelationId': str,
+                    'verifyE911Address': bool,
+                    'polylines': {},
+                    'launchType': str,
+                    'apartmentNumberRequired': bool,
+                    'floorPlanAvailable': bool,
+                    'addressMapStatus': TBD,
+                    'maxFloor': TBD,
+                    'buildingDetails': TBD,
+                    'uberPinEligible': bool,
+                    'intersectionCoordinatesLst': TBD,
+                    'coveragePercentage': TBD,
+                    'equipType': TBD,
+                    'addressDescriptorList': TBD,
+                    'bundleNames': TBD,
+                    'qualified4GHome': bool,
+                    'qualifiedCBand': bool,
+                    'preOrder5GFlow': bool,
+                    'preOrderLaunchDate': TBD,
+                    'isExpiredCart': bool,
+                    'isStreetSelected': bool,
+                    'isRevisitor': bool,
+                    'uberPinQualificatioIsRequired': bool,
+                    'displayStreetSelection': bool,
+                    'mucOfferEligible': bool,
+                    'storeSessionId': str,
+                    'fiosQualified': bool,
+                    'HSI': bool,
+                    'fiosResponse': {
+                        'meta': {
+                            'code': str,
+                            'description': str,
+                            'timestamp': str
+                        },
+                        'qualification': {
+                            'gigqualified': bool,
+                            'fiosqualified': bool,
+                            'hsiqualified': bool,
+                            'posturl': str,
+                            'visitId': str,
+                            'visitorId': str,
+                            'commonLq': str,
+                            'lbo': TBD,
+                            'captcha': TBD
+                        },
+                        'postValues': {
+                            'campaignCode': str,
+                            'config': {
+                                'addressInfo': {
+                                    'addressid': str,
+                                    'addressLine1': str,
+                                    'addressLine2': str,
+                                    'city': str,
+                                    'state': str,
+                                    'zipCode': str
+                                }
+                            },
+                            'vendorName': str,
+                            'targetUrl': str
+                        },
+                        'qualificationDetails': {
+                            'data': {
+                                'hoaServiceType': TBD,
+                                'qualified': TBD,
+                                'services': TBD,
+                                'pendingOrder': TBD,
+                                'smartCartDetails': TBD,
+                                'inService': TBD,
+                                'hoaFlag': TBD,
+                                'hoaContractNumber': TBD,
+                                'isLennarEligible': TBD,
+                                'tarCode': TBD,
+                                'cpnelg': TBD,
+                                'fiosSelfInstall': TBD,
+                                'fiosReady': TBD,
+                                'quantumEligible': TBD,
+                                'parsedAddress': TBD,
+                                'fiveG': bool,
+                                'addressNotFound': bool,
+                                'encryptedAddressFor5G': TBD,
+                                'qualified4GHome': bool,
+                                'state': TBD,
+                                'zip': TBD,
+                                'isError': TBD,
+                                'wirelessPlanType': TBD,
+                                'occupancyType': TBD
+                            }
+                        },
+                        'multipleAddressMatch': TBD,
+                        'parsedAddress': TBD
+                    }
+                },
+                'errorMap': TBD,
+                'statusMessage': str,
+                'statusCode': str
+            }
+        """
+
+        # TODO: response status/error checking, robust conversion to dict, etc.
+        #       (perhaps via ispchecker.tools)
+
+        # for now, just convert to dict with no error checking
+        response_dict = response.json()
+
+        # TODO: find reliable way of checking if address is valid
+
+        # check if 4G LTE home internet is available at address
+        self.available = response_dict.get("output").get("qualified4GHome")
+
+        # if available, then speed is 50 mbps
+        # TODO: find this value dynamically via another API request
+        if self.available:
+            self.top_speed = 50
+        else:
+            self.top_speed = 0
+
+        return response_dict
 
 
 if __name__ == "__main__":
