@@ -74,8 +74,8 @@ class Address:
 
         isps = {
             "Spectrum": Spectrum(self.address),
-            "Verizon": Verizon(self.address),
-            "CenturyLink": CenturyLink(self.address),
+            # "Verizon": Verizon(self.address),
+            # "CenturyLink": CenturyLink(self.address),
         }
 
         self.isps = isps
@@ -97,15 +97,18 @@ class Spectrum(ISP):
     def __init__(self, address_dict: dict):
 
         self.address = address_dict
-        self.top_speed = None
+        self.available = "Undetermined"
+        self.top_speed = "Undetermined"
         self.metadata = {}
 
-        # checking spectrum availability is a 2-step process:
-        #   1. get address metadata and session metadata
-        #   2. use this metadata to get specific offerings
         print(" Spectrum ".ljust(LJUST, ".") + " ", end="")
+
+        # retrieve address/session response
         r = self.retrieve_address_and_session_metadata()
-        self.available = self.parse_address_and_session_metadata(r)
+
+        # get dict from response and update self.metadata
+        self.metadata.update(self.parse_address_and_session_metadata(r))
+
         print(self.available)
 
     def retrieve_address_and_session_metadata(self):
@@ -128,29 +131,127 @@ class Spectrum(ISP):
         data = {
             "address": {
                 "line1": self.address.get("street"),
+                # "line2": <-- unused for now
                 "postalCode": self.address.get("zip"),
             }
         }
 
-        # post the request and obtain the response in dict form
-        response = requests.post(url, json=data, headers=headers)
-
-        return response
+        # post the request and return the response
+        return requests.post(url, json=data, headers=headers)
 
     def parse_address_and_session_metadata(self, response: requests.Response):
+        """placeholder text
 
-        # error checking here
+        .. code-block::
 
-        response = response.json()
+            {
+                'transactionId': str,
+                'rdofMatchLevel': str,
+                'availableForCampaigns': list,
+                'reasonCode': int,
+                'serviceabilityFlags': {
+                    'isPotentialExistingCustomer': bool,
+                    'isProspectPendingConnect': bool,
+                    'isPendingDisconnect': bool,
+                    'hasNoLobsServiceable': bool,
+                    'isTenant': bool,
+                    'hasOpenWorkOrder': bool,
+                    'isOutOfFootprint': bool,
+                    'isMultiUnitGTMax': bool,
+                    'isMultiUnitGTMinLTMaxPlusOne': bool,
+                    'hasMultipleMsos': bool,
+                    'isMsoNotFound': bool,
+                    'isServiceabilityContinue': bool,
+                    'isRepeatNonPay': bool,
+                    'is2MNPH1NPD': bool,
+                    'isNearbyMatch': bool,
+                    'isZip4Match': bool,
+                    'isMobileEligible': bool,
+                    'isMultiLocation': bool,
+                    'isAddressModified': bool,
+                    'hasFiberToPremise': bool,
+                    'isLocationServiceable': bool,
+                    'isNonPayStatus': bool,
+                    'isAddressConfirmed': bool,
+                    'isSIAeligible': bool,
+                    'isSMBCOMPOFF1Eligible': bool,
+                    'isCandidateForBulkPilot': bool
+                },
+                'gisColor': str,
+                'scrubbedAddress': {
+                    'line1': str,
+                    'line2': str,
+                    'city': str,
+                    'territoryCode': str,
+                    'zipCode': str
+                },
+                'addresses': [{
+                    'soloAddressId': int,
+                    'line1': str,
+                    'line2': str,
+                    'city': str,
+                    'territoryCode': str,
+                    'zipCode': str,
+                    'locationKey': str,
+                    'locationType': str,
+                    'serviceStatus': str,
+                    'spcDivisionId': str,
+                    'normalized': bool
+                }],
+                'msoCandidates': {
+                    'ewsBusinessUnit': str,
+                    'g2bBusinessUnit': str,
+                    'gisBusinessUnit': str,
+                    'defaultMSO': str
+                }
+            }
 
-        spectrum = [
-            max(False, True if i.get("locationKey") else False)
-            for i in response.get("addresses")
-        ][0]
+        Args:
+            response (requests.Response): _description_
 
-        return spectrum
+        Returns:
+            _type_: _description_
+        """
+
+        # TODO: response status/error checking, robust conversion to dict, etc.
+        #       (perhaps via ispchecker.tools)
+
+        # for now, just convert to dict with no error checking
+        response_dict = response.json()
+
+        # check whether spectrum is available by looping through addresses list
+        #   1. compare address line, city, territory (state), zip
+        #   2. if match, then check if locationKey exists
+        #      the ASSUMPTION is that it only exists if location is able to be serviced
+
+        for i in response_dict.get("addresses"):
+
+            # compare address elements
+            # convert relevant elements UPPERCASE for comparison w/ self.address
+            # ignore last token of line1 to avoid comparing things like 'ROAD' and 'RD'
+            # only take first 5 digits of zip codes
+            if (
+                self.address.get("street").rsplit(" ", 1)[0]
+                == i.get("line1").rsplit(" ", 1)[0].upper()
+                and self.address.get("city") == i.get("city").upper()
+                and self.address.get("state") == i.get("territoryCode").upper()
+                and self.address.get("zip")[:5] == i.get("zipCode")[:5]
+            ):
+
+                # check if locationKey exists and set self.available accordingly
+                if i.get("locationKey"):
+                    self.available = True
+                else:
+                    self.available = False
+
+                # availability has been determined, so response_dict can be returned now
+                return response_dict
+
+        # if no matches are found, do not update self.available and simply return response_dict
+        return response_dict
 
     # incorporate later
+    # note: transactionId is actually the sptoken
     # note: sptoken doesn't work here, though it does via browser (more details TBD)
 
     # serviceLocationId = response.get('addresses')[0].get('locationKey')
