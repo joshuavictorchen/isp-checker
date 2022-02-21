@@ -179,11 +179,46 @@
 <h1>CenturyLink<a class="headerlink" href="#centurylink" title="Permalink to this headline"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.CenturyLink">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">CenturyLink</span></span><a class="headerlink" href="#ispchecker.main.CenturyLink" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">CenturyLink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.main.ISP</span></code></a></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.check_centurylink">
-<span class="sig-name descname"><span class="pre">check_centurylink</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.check_centurylink" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.execute_centurylink_stack">
+<span class="sig-name descname"><span class="pre">execute_centurylink_stack</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.execute_centurylink_stack" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.retrieve_and_parse_access_token">
+<span class="sig-name descname"><span class="pre">retrieve_and_parse_access_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.retrieve_and_parse_access_token" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.retrieve_address_metadata">
+<span class="sig-name descname"><span class="pre">retrieve_address_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.retrieve_address_metadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.parse_address_metadata">
+<span class="sig-name descname"><span class="pre">parse_address_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.parse_address_metadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.retrieve_wireCenter">
+<span class="sig-name descname"><span class="pre">retrieve_wireCenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullAddress</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressId</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.retrieve_wireCenter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.parse_wireCenter">
+<span class="sig-name descname"><span class="pre">parse_wireCenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.parse_wireCenter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.retrieve_mbps">
+<span class="sig-name descname"><span class="pre">retrieve_mbps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullAddress</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wireCenter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.retrieve_mbps" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.parse_mbps">
+<span class="sig-name descname"><span class="pre">parse_mbps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.parse_mbps" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -257,7 +292,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2021, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-21 12:36:10.
+      <span class="lastupdated">Last updated on 2022-02-21 13:08:24.
       </span></p>
   </div>
 

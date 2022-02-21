@@ -75,7 +75,7 @@ class Address:
         isps = {
             "Spectrum": Spectrum(self.address),
             "Verizon": Verizon(self.address),
-            # "CenturyLink": CenturyLink()
+            "CenturyLink": CenturyLink(self.address),
         }
 
         self.isps = isps
@@ -174,26 +174,69 @@ class Spectrum(ISP):
 
 
 class CenturyLink(ISP):
-    def check_centurylink(self):
+    def __init__(self, address_dict: dict):
+
+        self.address = address_dict
+        self.available = None
+        self.top_speed = None
+        self.metadata = {}
 
         print(" CenturyLink ".ljust(LJUST, ".") + " ", end="")
+        self.execute_centurylink_stack()
+        print(self.top_speed)
 
-        # get access token
+    def execute_centurylink_stack(self):
+
+        access_token = self.retrieve_and_parse_access_token()
+        address_metadata_response = self.retrieve_address_metadata(access_token)
+        parsed_address_metadata = self.parse_address_metadata(address_metadata_response)
+        wireCenter_response = self.retrieve_wireCenter(
+            access_token,
+            parsed_address_metadata.get("provider"),
+            parsed_address_metadata.get("fullAddress"),
+            parsed_address_metadata.get("addressId"),
+        )
+        wireCenter = self.parse_wireCenter(wireCenter_response)
+        mbps_response = self.retrieve_mbps(
+            access_token,
+            parsed_address_metadata.get("fullAddress"),
+            parsed_address_metadata.get("addressId"),
+            wireCenter,
+        )
+        mbps = self.parse_mbps(mbps_response)
+
+        self.top_speed = mbps
+
+    def retrieve_and_parse_access_token(self):
+
         url = "https://shop.centurylink.com/uas/oauth"
         headers = {"Connection": "keep-alive"}
-        response = requests.post(url, headers=headers).json()
-        cltoken = "Bearer " + response.get("access_token")
+        response = requests.post(url, headers=headers)
+
+        # check response here
+
+        response = response.json()
+
+        access_token = "Bearer " + response.get("access_token")
+
+        return access_token
+
+    def retrieve_address_metadata(self, access_token):
+
+        url = "https://api.lumen.com/Application/v4/DCEP-Consumer/addressPredict"
+        headers = {"Authorization": access_token, "Connection": "keep-alive"}
+        params = (("addr", self.address.get("full_address")),)
+        response = requests.get(url, headers=headers, params=params)
+
+        return response
+
+    def parse_address_metadata(self, response: requests.Response):
+
+        # check response here
+
+        response = response.json()
 
         # get fullAddress, addressId, and provider
-        url = "https://api.lumen.com/Application/v4/DCEP-Consumer/addressPredict"
-        headers = {"Authorization": cltoken, "Connection": "keep-alive"}
-        params = (("addr", self.address.get("full_address")),)
-        response = requests.get(url, headers=headers, params=params).json()
-
-        # just use the first match for now
-        provider = response.get("provider")
-        fullAddress = response.get("predictedAddressList")[0].get("fullAddress")
-        addressId = response.get("predictedAddressList")[0].get("addressId")
 
         # match = False
         # for i in response.get('predictedAddressList'):
@@ -206,9 +249,23 @@ class CenturyLink(ISP):
         # if not match:
         #    return False
 
-        # get wireCenter
+        # just use the first match for now
+        provider = response.get("provider")
+        fullAddress = response.get("predictedAddressList")[0].get("fullAddress")
+        addressId = response.get("predictedAddressList")[0].get("addressId")
+
+        metadata = {
+            "provider": provider,
+            "fullAddress": fullAddress,
+            "addressId": addressId,
+        }
+
+        return metadata
+
+    def retrieve_wireCenter(self, access_token, provider, fullAddress, addressId):
+
         headers = {
-            "Authorization": cltoken,
+            "Authorization": access_token,
             "Connection": "keep-alive",
         }
         data = {
@@ -220,13 +277,24 @@ class CenturyLink(ISP):
             "https://api.lumen.com/Application/v4/DCEP-Consumer/identifyAddress",
             headers=headers,
             json=data,
-        ).json()
+        )
+
+        return response
+
+    def parse_wireCenter(self, response: requests.Response):
+
+        # check response here
+
+        response = response.json()
 
         wireCenter = response.get("addrValInfo").get("wireCenter")
 
-        # get speed
+        return wireCenter
+
+    def retrieve_mbps(self, access_token, addressId, fullAddress, wireCenter):
+
         headers = {
-            "Authorization": cltoken,
+            "Authorization": access_token,
             "Connection": "keep-alive",
         }
 
@@ -240,11 +308,19 @@ class CenturyLink(ISP):
             "https://api.centurylink.com/Application/v4/DCEP-Consumer/offer",
             headers=headers,
             json=data,
-        ).json()
+        )
+
+        return response
+
+    def parse_mbps(self, response: requests.Response):
+
+        # check response here
+
+        response = response.json()
 
         mbps = response.get("offersList")[0].get("downloadSpeedMbps")
 
-        print(mbps)
+        return mbps
 
 
 class Verizon(ISP):
