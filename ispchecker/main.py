@@ -244,8 +244,8 @@ class Spectrum(ISP):
                 if i.get("locationKey"):
                     self.available = True
 
-                # availability has been determined, so response_dict can be returned now
-                return response_dict
+                    # availability has been determined, so response_dict can be returned now
+                    return response_dict
 
         # if this line is reached, then no matching addresses were found
         self.available = False
