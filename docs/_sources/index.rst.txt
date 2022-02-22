@@ -23,25 +23,25 @@ ISP
    :show-inheritance:
 
 Spectrum
---------
+========
 
 .. autoclass:: ispchecker.main.Spectrum
    :members:
    :undoc-members:
    :show-inheritance:
 
-Verizon
--------
+CenturyLink
+===========
 
-.. autoclass:: ispchecker.main.Verizon
+.. autoclass:: ispchecker.main.CenturyLink
    :members:
    :undoc-members:
    :show-inheritance:
 
-CenturyLink
------------
+Verizon
+=======
 
-.. autoclass:: ispchecker.main.CenturyLink
+.. autoclass:: ispchecker.main.Verizon
    :members:
    :undoc-members:
    :show-inheritance:
