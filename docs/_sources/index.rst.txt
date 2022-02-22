@@ -1,6 +1,10 @@
 Overview
 --------
 
+.. warning::
+
+    This is a new project. Performance may be neither accurate nor robust. Results not guaranteed.
+
 User Manual
 ===========
 

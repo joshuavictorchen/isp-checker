@@ -2,7 +2,7 @@
 
 # isp-checker
 
-This is a new project. [Documentation can be found here.](https://joshuavictorchen.github.io/isp-checker/)
+This is a new project. Performance may be neither accurate nor robust. [Documentation can be found here.](https://joshuavictorchen.github.io/isp-checker/)
 
 ## Installation
 
