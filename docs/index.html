@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Framework &mdash; docs</title>
+  <title>Overview &mdash; docs</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/logo-original.png"/>
@@ -42,7 +42,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Framework</a></li>
+<li><a class="reference internal" href="#">Overview</a></li>
+<li><a class="reference internal" href="#address">Address</a></li>
+<li><a class="reference internal" href="#isp">ISP</a></li>
+<li><a class="reference internal" href="#spectrum">Spectrum</a></li>
+<li><a class="reference internal" href="#verizon">Verizon</a></li>
+<li><a class="reference internal" href="#centurylink">CenturyLink</a></li>
+<li><a class="reference internal" href="#module-ispchecker.tools">Tools</a></li>
 </ul>
 </div>
         </div>
@@ -59,7 +65,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Framework</li>
+      <li>Overview</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/joshuavictorchen/isp-checker/blob/master/docs/index.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -71,12 +77,634 @@
              
   <div class="toctree-wrapper compound">
 </div>
-<section id="framework">
-<h1>Framework<a class="headerlink" href="#framework" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h1>
+<p>Placeholder text.</p>
+</section>
+<section id="address">
+<h1>Address<a class="headerlink" href="#address" title="Permalink to this headline"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ispchecker.main.Framework">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Framework</span></span><a class="headerlink" href="#ispchecker.main.Framework" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.main.Address">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Address</span></span><a class="headerlink" href="#ispchecker.main.Address" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Placeholder text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>full_address</strong> (<em>str</em>) – Placeholder text.</p>
+</dd>
+</dl>
+<p><strong>Relevant instance attributes:</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>address</strong> (<em>dict</em>): Dictionary of addresses.</p></li>
+<li><p><strong>isps</strong> (<em>dict</em>): Dictionary of instantiated ISPs.</p></li>
+</ul>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Address.parse_address">
+<span class="sig-name descname"><span class="pre">parse_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address.parse_address" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Address.check_isps">
+<span class="sig-name descname"><span class="pre">check_isps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address.check_isps" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="isp">
+<h1>ISP<a class="headerlink" href="#isp" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ispchecker.main.ISP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">ISP</span></span><a class="headerlink" href="#ispchecker.main.ISP" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_availability">
+<span class="sig-name descname"><span class="pre">get_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_availability" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_top_speed">
+<span class="sig-name descname"><span class="pre">get_top_speed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_top_speed" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_metadata">
+<span class="sig-name descname"><span class="pre">get_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_metadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="spectrum">
+<h1>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ispchecker.main.Spectrum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.main.ISP</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Spectrum.retrieve_address_and_session_metadata">
+<span class="sig-name descname"><span class="pre">retrieve_address_and_session_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum.retrieve_address_and_session_metadata" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Spectrum.parse_address_and_session_metadata">
+<span class="sig-name descname"><span class="pre">parse_address_and_session_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="Permalink to this definition"></a></dt>
+<dd><p>placeholder text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>requests.Response</em>) – _description_</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;transactionId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;rdofMatchLevel&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;availableForCampaigns&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+    <span class="s1">&#39;reasonCode&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;serviceabilityFlags&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;isPotentialExistingCustomer&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isProspectPendingConnect&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isPendingDisconnect&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;hasNoLobsServiceable&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isTenant&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;hasOpenWorkOrder&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isOutOfFootprint&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isMultiUnitGTMax&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isMultiUnitGTMinLTMaxPlusOne&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;hasMultipleMsos&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isMsoNotFound&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isServiceabilityContinue&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isRepeatNonPay&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;is2MNPH1NPD&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isNearbyMatch&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isZip4Match&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isMobileEligible&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isMultiLocation&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isAddressModified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;hasFiberToPremise&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isLocationServiceable&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isNonPayStatus&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isAddressConfirmed&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isSIAeligible&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isSMBCOMPOFF1Eligible&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isCandidateForBulkPilot&#39;</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;gisColor&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;scrubbedAddress&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;line1&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;line2&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;territoryCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;zipCode&#39;</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;addresses&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;soloAddressId&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="s1">&#39;line1&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;line2&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;territoryCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;zipCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;locationKey&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;locationType&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;serviceStatus&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;spcDivisionId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;normalized&#39;</span><span class="p">:</span> <span class="nb">bool</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;msoCandidates&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ewsBusinessUnit&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;g2bBusinessUnit&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;gisBusinessUnit&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;defaultMSO&#39;</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="verizon">
+<h1>Verizon<a class="headerlink" href="#verizon" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ispchecker.main.Verizon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Verizon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.main.ISP</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Verizon.retrieve_plan_availability">
+<span class="sig-name descname"><span class="pre">retrieve_plan_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon.retrieve_plan_availability" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Verizon.parse_plan_availability">
+<span class="sig-name descname"><span class="pre">parse_plan_availability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon.parse_plan_availability" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>requests.Response</em>) – _description_</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">response</span> <span class="n">mapping</span> <span class="ow">is</span> <span class="n">incomplete</span><span class="p">)</span>
+
+<span class="p">{</span>
+    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;qualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;reservation&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;emailAddress&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;addressLine1&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;addressLine2&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;zipCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;reasonCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;addressType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;installType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;floorToStreetsMap&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;phoneNumber&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;addressfromAccount&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;currentFloorNumber&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;eventCorrelationId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;verifyE911Address&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;polylines&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;launchType&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;apartmentNumberRequired&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;floorPlanAvailable&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;addressMapStatus&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;maxFloor&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;buildingDetails&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;uberPinEligible&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;intersectionCoordinatesLst&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;coveragePercentage&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;equipType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;addressDescriptorList&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;bundleNames&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;qualified4GHome&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;qualifiedCBand&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;preOrder5GFlow&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;preOrderLaunchDate&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;isExpiredCart&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isStreetSelected&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;isRevisitor&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;uberPinQualificatioIsRequired&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;displayStreetSelection&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;mucOfferEligible&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;storeSessionId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;fiosQualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;HSI&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;fiosResponse&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;meta&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="nb">str</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;qualification&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;gigqualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;fiosqualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;hsiqualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s1">&#39;posturl&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;visitId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;visitorId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;commonLq&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;lbo&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                <span class="s1">&#39;captcha&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;postValues&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;campaignCode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;addressInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;addressid&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;addressLine1&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;addressLine2&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                        <span class="s1">&#39;zipCode&#39;</span><span class="p">:</span> <span class="nb">str</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;vendorName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s1">&#39;targetUrl&#39;</span><span class="p">:</span> <span class="nb">str</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;qualificationDetails&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;hoaServiceType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;qualified&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;services&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;pendingOrder&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;smartCartDetails&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;inService&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;hoaFlag&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;hoaContractNumber&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;isLennarEligible&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;tarCode&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;cpnelg&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;fiosSelfInstall&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;fiosReady&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;quantumEligible&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;parsedAddress&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;fiveG&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;addressNotFound&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;encryptedAddressFor5G&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;qualified4GHome&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;zip&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;isError&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;wirelessPlanType&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+                    <span class="s1">&#39;occupancyType&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;multipleAddressMatch&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+            <span class="s1">&#39;parsedAddress&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;errorMap&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;statusMessage&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;statusCode&#39;</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="centurylink">
+<h1>CenturyLink<a class="headerlink" href="#centurylink" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">CenturyLink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.main.ISP</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.execute_centurylink_stack">
+<span class="sig-name descname"><span class="pre">execute_centurylink_stack</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.execute_centurylink_stack" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.retrieve_and_parse_access_token">
+<span class="sig-name descname"><span class="pre">retrieve_and_parse_access_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.retrieve_and_parse_access_token" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>_description_</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>_type_</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;expires_in&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;access_token&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;issued_at&#39;</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.retrieve_address_metadata">
+<span class="sig-name descname"><span class="pre">retrieve_address_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.retrieve_address_metadata" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>access_token</strong> (<em>_type_</em>) – _description_</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;provider&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;predictedAddressList&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;fullAddress&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;addressId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;mdu&#39;</span><span class="p">:</span> <span class="nb">bool</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.parse_address_metadata">
+<span class="sig-name descname"><span class="pre">parse_address_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.parse_address_metadata" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>requests.Response</em>) – _description_</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.retrieve_wireCenter">
+<span class="sig-name descname"><span class="pre">retrieve_wireCenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provider</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullAddress</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressId</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.retrieve_wireCenter" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>access_token</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>provider</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>fullAddress</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>addressId</strong> (<em>_type_</em>) – _description_</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;addrValInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;billingSource&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;fullAddress&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;addressId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;mduInfo&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;wireCenter&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;nearMatchAddress&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;nearMatchList&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+        <span class="s1">&#39;exactMatchAddress&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;loopQualInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;messageDetail&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;leadIndicator&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;leadIndicatorStatus&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;addressId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;unitNumber&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;geoSecUnitId&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;googleInfo&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;biwfInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;fiberQualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s1">&#39;redirectUrl&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;below940&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;existingService&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;expectedCompDate&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.parse_wireCenter">
+<span class="sig-name descname"><span class="pre">parse_wireCenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.parse_wireCenter" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>requests.Response</em>) – _description_</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.retrieve_offerings">
+<span class="sig-name descname"><span class="pre">retrieve_offerings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addressId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullAddress</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wireCenter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.retrieve_offerings" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>access_token</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>addressId</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>fullAddress</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>wireCenter</strong> (<em>_type_</em>) – _description_</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;fixedWirelessQualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;groupId&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;dynamicRuleVersion&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;offersList&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;downloadSpeed&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;uploadSpeed&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;downloadSpeedMbps&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;uploadSpeedMbps&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;downloadDisplaySpeed&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;uploadDisplaySpeed&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;internetTypeSortOrder&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="s1">&#39;internetType&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;productType&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;priceType&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;skuName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;networkInfrastructure&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;offerName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;mandatoryTechInstallFlag&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;qualificationColorName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;catalogSpecId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;catalogId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;offerType&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;productOfferingId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;productIdentifierKey&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;discountedOtc&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;discountedRc&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;otc&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;rc&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;strikePrice&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s1">&#39;discount&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">TBD</span><span class="p">),</span>
+            <span class="s1">&#39;derivedDownSpeed&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;derivedUpSpeed&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;offerDescription&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;priceKey&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;productDisplayName&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;bmOfferDetails&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;modem&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="p">(</span><span class="n">truncated</span> <span class="o">-</span> <span class="n">SKUs</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;groupId&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+            <span class="s1">&#39;vas&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="p">(</span><span class="n">truncated</span> <span class="o">-</span> <span class="n">SKUs</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;fixedWirelessOffersList&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;secureWifiOffersList&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;dialUp&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;noCatalogueProducts&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;errorMessage&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;billingSource&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;defaultOffer&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;cityOmaha940Offer&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;orderNumber&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
+    <span class="s1">&#39;gfastFlag&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;giftCardFlag&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;sling&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;thirtyDollarFiberOffer&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;epix&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;gc200for940M&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;caf&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s1">&#39;defaultSpeedServiceFailure&#39;</span><span class="p">:</span> <span class="n">TBD</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.CenturyLink.parse_offerings">
+<span class="sig-name descname"><span class="pre">parse_offerings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink.parse_offerings" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>requests.Response</em>) – _description_</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ispchecker.tools">
+<span id="tools"></span><h1>Tools<a class="headerlink" href="#module-ispchecker.tools" title="Permalink to this headline"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="ispchecker.tools.print_recursive_dict">
+<span class="sig-prename descclassname"><span class="pre">ispchecker.tools.</span></span><span class="sig-name descname"><span class="pre">print_recursive_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent_spaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.tools.print_recursive_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Prints a formatted nested dictionary to the console.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># example console output for an input of {&#39;123&#39;:{&#39;456&#39;:[&#39;aaa&#39;, &#39;bbb&#39;, &#39;ccc&#39;]}}</span>
+
+<span class="s2">&quot;</span>
+    <span class="mi">123</span> <span class="p">:</span>
+            <span class="mi">456</span> <span class="p">:</span> <span class="n">aaa</span>
+                <span class="n">bbb</span>
+                <span class="n">ccc</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Dictionary of values that can be converted to strings.</p></li>
+<li><p><strong>indent_spaces</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of leading whitespaces to insert before each element. Defaults to 3.</p></li>
+<li><p><strong>indent_step</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of whitespaces to increase the indentation by, for each level of <code class="docutils literal notranslate"><span class="pre">dict</span></code> nesting. Defaults to 2.</p></li>
+<li><p><strong>recursion</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not this method is being called by itself. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ispchecker.tools.list_to_string">
+<span class="sig-prename descclassname"><span class="pre">ispchecker.tools.</span></span><span class="sig-name descname"><span class="pre">list_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leading_whitespaces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.tools.list_to_string" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a list and returns a formatted string containing each element delimited by newlines.</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Incorporate <a class="reference internal" href="#ispchecker.tools.print_recursive_dict" title="ispchecker.tools.print_recursive_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_recursive_dict</span></code></a> for lists with dictionary elements, i.e. <code class="docutils literal notranslate"><span class="pre">[{},</span> <span class="pre">{}]</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>list</em>) – A list of elements that can be represented by strings.</p></li>
+<li><p><strong>leading_whitespaces</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of leading whitespaces to insert before each element. Defaults to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Formatted string containing each element of the provided list delimited by newlines, with <code class="docutils literal notranslate"><span class="pre">leading_whitespaces</span></code> leading whitespaces before each element.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># example returned string for an input of [&#39;abc&#39;, &#39;def&#39;, &#39;ghi&#39;]</span>
+
+<span class="s2">&quot; abc</span><span class="se">\n</span><span class="s2"> def</span><span class="se">\n</span><span class="s2"> ghi&quot;</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -90,7 +718,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2021, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-20 17:24:45.
+      <span class="lastupdated">Last updated on 2022-02-21 20:01:31.
       </span></p>
   </div>
 

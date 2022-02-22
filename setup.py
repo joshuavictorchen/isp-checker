@@ -7,5 +7,6 @@ setup(
     entry_points={"console_scripts": ["ispcheck = ispchecker.main:main"]},
     install_requires=[
         "requests",
+        "cryptography",
     ],
 )
