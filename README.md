@@ -2,7 +2,7 @@
 
 # isp-checker
 
-This project is under construction. [Documentation can be found here.](https://joshuavictorchen.github.io/isp-checker/)
+This is a new project. [Documentation can be found here.](https://joshuavictorchen.github.io/isp-checker/)
 
 ## Installation
 
@@ -24,7 +24,7 @@ Navigate into a directory of your choice and grab the code from this repository:
 
 Once installed, the `ispcheck` command can be executed from any working directory to check for ISP availability at a given address.
 
-The program is currently in its early stages, and is not very robust. The command MUST be entered in the following form, with no deviation (i.e., two-liner addresses are currently unsupported):
+The program is currently in its early stages, and is not very robust. The command MUST be entered in the following form, with no deviation (i.e., two-liner addresses are not yet supported):
 
     ispcheck [street address], [city name], [state abbreviation], [5 digit zip code]
 
