@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath("../ispchecker"))
 # -- Project information -----------------------------------------------------
 
 project = "isp-checker"
-copyright = "2021, Joshua Chen"
+copyright = "2022, Joshua Chen"
 author = "Joshua Chen"
 version = "beta"
 
@@ -60,6 +60,7 @@ html_logo = "./_images/logo-64.png"
 html_theme_options = {
     "style_external_links": True,
     "style_nav_header_background": "#283618",
+    "collapse_navigation": True,
 }
 
 # The name for this set of Sphinx documents.  If None, it defaults to

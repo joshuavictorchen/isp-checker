@@ -243,14 +243,13 @@ class Spectrum(ISP):
                 # check if locationKey exists and set self.available accordingly
                 if i.get("locationKey"):
                     self.available = True
-                else:
-                    self.available = False
-                    self.top_speed = 0
 
                 # availability has been determined, so response_dict can be returned now
                 return response_dict
 
-        # if no matches are found, do not update self.available and simply return response_dict
+        # if this line is reached, then no matching addresses were found
+        self.available = False
+
         return response_dict
 
     # incorporate later
