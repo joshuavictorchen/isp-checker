@@ -1,7 +1,7 @@
 import requests
 import sys
 import warnings
-from abc import ABC, abstractmethod
+from abc import ABC
 from cryptography.utils import CryptographyDeprecationWarning
 from ispchecker import tools as t
 
@@ -74,7 +74,7 @@ class Address:
 
         isps = {
             "Spectrum": Spectrum(self.address),
-            # "CenturyLink": CenturyLink(self.address),
+            "CenturyLink": CenturyLink(self.address),
             "Verizon": Verizon(self.address),
         }
 
@@ -101,7 +101,7 @@ class Spectrum(ISP):
         self.top_speed = "Undetermined"
         self.metadata = {}
 
-        print(" Spectrum ".ljust(LJUST, ".") + " ", end="")
+        print(" Spectrum ".ljust(LJUST, ".") + " ", end="", flush=True)
 
         # retrieve address/session response
         r = self.retrieve_address_and_session_metadata()
@@ -191,19 +191,21 @@ class Spectrum(ISP):
                     'territoryCode': str,
                     'zipCode': str
                 },
-                'addresses': [{
-                    'soloAddressId': int,
-                    'line1': str,
-                    'line2': str,
-                    'city': str,
-                    'territoryCode': str,
-                    'zipCode': str,
-                    'locationKey': str,
-                    'locationType': str,
-                    'serviceStatus': str,
-                    'spcDivisionId': str,
-                    'normalized': bool
-                }],
+                'addresses': [
+                    {
+                        'soloAddressId': int,
+                        'line1': str,
+                        'line2': str,
+                        'city': str,
+                        'territoryCode': str,
+                        'zipCode': str,
+                        'locationKey': str,
+                        'locationType': str,
+                        'serviceStatus': str,
+                        'spcDivisionId': str,
+                        'normalized': bool
+                    }
+                ],
                 'msoCandidates': {
                     'ewsBusinessUnit': str,
                     'g2bBusinessUnit': str,
@@ -279,51 +281,115 @@ class CenturyLink(ISP):
     def __init__(self, address_dict: dict):
 
         self.address = address_dict
-        self.available = None
-        self.top_speed = None
+        self.available = "Undetermined"
+        self.top_speed = "Undetermined"
         self.metadata = {}
 
-        print(" CenturyLink ".ljust(LJUST, ".") + " ", end="")
+        print(" CenturyLink ".ljust(LJUST, ".") + " ", end="", flush=True)
         self.execute_centurylink_stack()
-        print(self.top_speed)
+
+        if not self.available or self.available == "Undetermined":
+            print(self.available)
+        else:
+            print(f"{self.available} ({self.top_speed} Mbps)")
 
     def execute_centurylink_stack(self):
 
+        # get security token
         access_token = self.retrieve_and_parse_access_token()
+
+        # get initial address response
         address_metadata_response = self.retrieve_address_metadata(access_token)
+
+        # check for returned address matches
         parsed_address_metadata = self.parse_address_metadata(address_metadata_response)
+
+        # exit routine if no matches found
+        if not parsed_address_metadata:
+            self.available = False
+            return
+
+        # get request wireCenter attribute using the parsed_address_metadata
         wireCenter_response = self.retrieve_wireCenter(
             access_token,
             parsed_address_metadata.get("provider"),
             parsed_address_metadata.get("fullAddress"),
             parsed_address_metadata.get("addressId"),
         )
+
+        # parse wireCenter attribute from response
         wireCenter = self.parse_wireCenter(wireCenter_response)
-        mbps_response = self.retrieve_mbps(
+
+        # exit routine if no match found
+        # NOTE: NOT checking for null wireCenter
+        if wireCenter == "No match":
+            self.available = False
+            self.top_speed = 0
+            return
+
+        offering_response = self.retrieve_offerings(
             access_token,
-            parsed_address_metadata.get("fullAddress"),
             parsed_address_metadata.get("addressId"),
+            parsed_address_metadata.get("fullAddress"),
             wireCenter,
         )
-        mbps = self.parse_mbps(mbps_response)
 
-        self.top_speed = mbps
+        self.metadata.update(self.parse_offerings(offering_response))
 
     def retrieve_and_parse_access_token(self):
+        """_summary_
+
+        Returns:
+            _type_: _description_
+
+        .. code-block::
+
+            {
+                'expires_in': str,
+                'access_token': str,
+                'issued_at': str
+            }
+        """
 
         url = "https://shop.centurylink.com/uas/oauth"
         headers = {"Connection": "keep-alive"}
         response = requests.post(url, headers=headers)
 
-        # check response here
+        # TODO: response status/error checking, robust conversion to dict, etc.
+        #       (perhaps via ispchecker.tools)
 
-        response = response.json()
+        # for now, just convert to dict with no error checking
+        response_dict = response.json()
 
-        access_token = "Bearer " + response.get("access_token")
+        # subsequent API requests use access_token prepended by "Bearer "
+        access_token = "Bearer " + response_dict.get("access_token")
 
         return access_token
 
     def retrieve_address_metadata(self, access_token):
+        """_summary_
+
+        Args:
+            access_token (_type_): _description_
+
+        Returns:
+            _type_: _description_
+
+        .. code-block::
+
+            {
+                'status': int,
+                'message': str,
+                'provider': str,
+                'predictedAddressList': [
+                    {
+                        'fullAddress': str,
+                        'addressId': str,
+                        'mdu': bool
+                    }
+                ]
+            }
+        """
 
         url = "https://api.lumen.com/Application/v4/DCEP-Consumer/addressPredict"
         headers = {"Authorization": access_token, "Connection": "keep-alive"}
@@ -333,29 +399,65 @@ class CenturyLink(ISP):
         return response
 
     def parse_address_metadata(self, response: requests.Response):
+        """_summary_
 
-        # check response here
+        Args:
+            response (requests.Response): _description_
 
-        response = response.json()
+        Returns:
+            _type_: _description_
+        """
 
-        # get fullAddress, addressId, and provider
+        # TODO: response status/error checking, robust conversion to dict, etc.
+        #       (perhaps via ispchecker.tools)
 
-        # match = False
-        # for i in response.get('predictedAddressList'):
-        #    print(", ".join(i.get('fullAddress').split(',')[:-1]))
-        #    if (", ".join(i.get('fullAddress').split(',')[:-1])) == self.address.get('full_address'):
-        #        match = True
-        #        fullAddress = i.get('fullAddress')
-        #        addressId = i.get('addressId')
-        #        break
-        # if not match:
-        #    return False
+        # for now, just convert to dict with no error checking
+        response_dict = response.json()
 
-        # just use the first match for now
-        provider = response.get("provider")
-        fullAddress = response.get("predictedAddressList")[0].get("fullAddress")
-        addressId = response.get("predictedAddressList")[0].get("addressId")
+        # if no predicted addresses found, then return None
+        if len(response_dict.get("predictedAddressList")) == 0:
+            return None
 
+        # check if queried address is in predicted address list
+        match = False
+        for i in response_dict.get("predictedAddressList"):
+
+            # fullAddress is returned in the form: 123 NAME RD,CITY,STATE 12345,USA
+            # reformat and remove the 'RD' and 'USA' for comparison to self.address element
+
+            # get list of address components, minus the last token
+            fullAddress = i.get("fullAddress").split(",")[:-1]
+
+            # remove last sub-token of first token (i.e., the 'RD')
+            fullAddress[0] = fullAddress[0].rsplit(" ", 1)[0]
+
+            # join the components back together
+            fullAddress = ", ".join(fullAddress)
+
+            # perform comparison
+            if fullAddress == (
+                self.address.get("street").rsplit(" ", 1)[0]
+                + ", "
+                + self.address.get("city")
+                + ", "
+                + self.address.get("state")
+                + " "
+                + self.address.get("zip")
+            ):
+
+                match = True
+                fullAddress = i.get("fullAddress")
+                addressId = i.get("addressId")
+                break
+
+        # if no matches found, then return None
+        if not match:
+            return None
+
+        # get provider
+        provider = response_dict.get("provider")
+
+        # store parsed values in dict
         metadata = {
             "provider": provider,
             "fullAddress": fullAddress,
@@ -365,6 +467,52 @@ class CenturyLink(ISP):
         return metadata
 
     def retrieve_wireCenter(self, access_token, provider, fullAddress, addressId):
+        """_summary_
+
+        Args:
+            access_token (_type_): _description_
+            provider (_type_): _description_
+            fullAddress (_type_): _description_
+            addressId (_type_): _description_
+
+        Returns:
+            _type_: _description_
+
+        .. code-block::
+
+            {
+                'status': int,
+                'message': str,
+                'addrValInfo': {
+                    'result': str,
+                    'billingSource': str,
+                    'fullAddress': str,
+                    'addressId': str,
+                    'mduInfo': TBD,
+                    'wireCenter': str,
+                    'nearMatchAddress': TBD,
+                    'nearMatchList': TBD,
+                    'exactMatchAddress': TBD
+                },
+                'loopQualInfo': {
+                    'message': str,
+                    'messageDetail': TBD
+                },
+                'leadIndicator': str,
+                'leadIndicatorStatus': TBD,
+                'addressId': str,
+                'unitNumber': TBD,
+                'geoSecUnitId': TBD,
+                'googleInfo': TBD,
+                'biwfInfo': {
+                    'fiberQualified': bool,
+                    'redirectUrl': TBD
+                },
+                'below940': bool,
+                'existingService': bool,
+                'expectedCompDate': TBD
+            }
+        """
 
         headers = {
             "Authorization": access_token,
@@ -384,16 +532,118 @@ class CenturyLink(ISP):
         return response
 
     def parse_wireCenter(self, response: requests.Response):
+        """_summary_
 
-        # check response here
+        Args:
+            response (requests.Response): _description_
 
-        response = response.json()
+        Returns:
+            _type_: _description_
+        """
 
-        wireCenter = response.get("addrValInfo").get("wireCenter")
+        # TODO: response status/error checking, robust conversion to dict, etc.
+        #       (perhaps via ispchecker.tools)
+
+        # for now, just convert to dict with no error checking
+        response_dict = response.json()
+
+        # ensure the system has found an exact match for the address
+        # TODO: move this message string to a settings/config file
+        if response_dict.get("message") != "GREEN - exact match":
+            return "No match"
+
+        # get the wireCenter name
+        wireCenter = response_dict.get("addrValInfo").get("wireCenter")
 
         return wireCenter
 
-    def retrieve_mbps(self, access_token, addressId, fullAddress, wireCenter):
+    def retrieve_offerings(self, access_token, addressId, fullAddress, wireCenter):
+        """_summary_
+
+        Args:
+            access_token (_type_): _description_
+            addressId (_type_): _description_
+            fullAddress (_type_): _description_
+            wireCenter (_type_): _description_
+
+        Returns:
+            _type_: _description_
+
+        .. code-block::
+
+            {
+                'fixedWirelessQualified': bool,
+                'groupId': TBD,
+                'dynamicRuleVersion': TBD,
+                'offersList': [
+                    {
+                        'downloadSpeed': str,
+                        'uploadSpeed': str,
+                        'downloadSpeedMbps': str,
+                        'uploadSpeedMbps': str,
+                        'downloadDisplaySpeed': str,
+                        'uploadDisplaySpeed': str,
+                        'internetTypeSortOrder': int,
+                        'internetType': str,
+                        'productType': str,
+                        'priceType': str,
+                        'skuName': str,
+                        'price': float,
+                        'networkInfrastructure': str,
+                        'offerName': str,
+                        'mandatoryTechInstallFlag': bool,
+                        'qualificationColorName': str,
+                        'catalogSpecId': str,
+                        'catalogId': str,
+                        'offerType': str,
+                        'productOfferingId': str,
+                        'productIdentifierKey': str,
+                        'discountedOtc': float,
+                        'discountedRc': float,
+                        'otc': float,
+                        'rc': float,
+                        'strikePrice': float,
+                        'discount': list(TBD),
+                        'derivedDownSpeed': str,
+                        'derivedUpSpeed': str,
+                        'offerDescription': str,
+                        'priceKey': str,
+                        'productDisplayName': str,
+                        'description': str,
+                        'bmOfferDetails': str,
+                        'modem': [
+                            {
+                                (truncated - SKUs)
+                            }
+                        ],
+                        'groupId': TBD,
+                        'vas': [
+                            {
+                                (truncated - SKUs)
+                            }
+                        ]
+                    }
+                ],
+                'fixedWirelessOffersList': TBD,
+                'secureWifiOffersList': TBD,
+                'dialUp': bool,
+                'noCatalogueProducts': bool,
+                'errorMessage': TBD,
+                'billingSource': TBD,
+                'status': str,
+                'defaultOffer': bool,
+                'cityOmaha940Offer': bool,
+                'orderNumber': TBD,
+                'gfastFlag': bool,
+                'giftCardFlag': bool,
+                'sling': bool,
+                'thirtyDollarFiberOffer': bool,
+                'epix': bool,
+                'gc200for940M': bool,
+                'caf': bool,
+                'defaultSpeedServiceFailure': TBD
+            }
+        """
 
         headers = {
             "Authorization": access_token,
@@ -414,15 +664,30 @@ class CenturyLink(ISP):
 
         return response
 
-    def parse_mbps(self, response: requests.Response):
+    def parse_offerings(self, response: requests.Response):
+        """_summary_
 
-        # check response here
+        Args:
+            response (requests.Response): _description_
 
-        response = response.json()
+        Returns:
+            _type_: _description_
+        """
 
-        mbps = response.get("offersList")[0].get("downloadSpeedMbps")
+        # TODO: response status/error checking, robust conversion to dict, etc.
+        #       (perhaps via ispchecker.tools)
 
-        return mbps
+        # for now, just convert to dict with no error checking
+        response_dict = response.json()
+
+        # get the top speed in mbps
+        # CenturyLink lists the fastest offer first, per their website
+        self.top_speed = response_dict.get("offersList")[0].get("downloadSpeedMbps")
+
+        # this also means that it's available by definition
+        self.available = True
+
+        return response_dict
 
 
 class Verizon(ISP):
@@ -433,7 +698,7 @@ class Verizon(ISP):
         self.top_speed = "Undetermined"
         self.metadata = {}
 
-        print(" Verizon ".ljust(LJUST, ".") + " ", end="")
+        print(" Verizon LTE ".ljust(LJUST, ".") + " ", end="", flush=True)
 
         # retrieve plan availability
         r = self.retrieve_plan_availability()
