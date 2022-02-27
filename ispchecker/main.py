@@ -8,6 +8,7 @@ from ispchecker import tools as t
 # filter irrelevant deprecation warnings
 warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
 
+# CLI formatting constants
 DIVIDER = "\n ---------------------------------------"
 LJUST = 19
 
@@ -83,23 +84,50 @@ class Address:
 
 
 class ISP(ABC):
+    def __init__(self, address_dict: dict):
+
+        self.address = address_dict
+        self.available = "Undetermined"
+        self.top_speed = "Undetermined"
+        self.summary = {}
+        self.metadata = {}
+
+    def get_address(self):
+        return self.address
+
     def get_availability(self):
         return self.available
 
     def get_top_speed(self):
         return self.top_speed
 
+    def get_summary(self):
+        return self.summary
+
     def get_metadata(self):
         return self.metadata
 
 
 class Spectrum(ISP):
+    """
+    .. admonition:: TODO
+
+        `This endpoint <https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers>`__
+        returns a list of offers and internet speeds when provided with a ``serviceLocationId`` query,
+        and ``session-id`` and ``client-id`` headers.
+
+        These the query and header inputs correspond to the ``locationKey`` and ``transactionId`` attributes,
+        respectively, in the response dictionary from
+        :py:obj:`parse_address_and_session_metadata<ispchecker.main.Spectrum.parse_address_and_session_metadata>`.
+        This nomenclature inconsistency is a quirk of the Spectrum API.
+
+        While this endpoint works well in a browser setting, the requests return bad responses when queried
+        programmatically. This is likely due to session/cookie issues, which have yet to be worked out.
+    """
+
     def __init__(self, address_dict: dict):
 
-        self.address = address_dict
-        self.available = "Undetermined"
-        self.top_speed = "Undetermined"
-        self.metadata = {}
+        super().__init__(address_dict)
 
         print(" Spectrum ".ljust(LJUST, ".") + " ", end="", flush=True)
 
@@ -149,6 +177,8 @@ class Spectrum(ISP):
             _type_: _description_
 
         .. code-block::
+
+            # (response mapping may be incomplete)
 
             {
                 'transactionId': str,
@@ -279,10 +309,7 @@ class Spectrum(ISP):
 class CenturyLink(ISP):
     def __init__(self, address_dict: dict):
 
-        self.address = address_dict
-        self.available = "Undetermined"
-        self.top_speed = "Undetermined"
-        self.metadata = {}
+        super().__init__(address_dict)
 
         print(" CenturyLink ".ljust(LJUST, ".") + " ", end="", flush=True)
         self.execute_centurylink_stack()
@@ -375,6 +402,8 @@ class CenturyLink(ISP):
             _type_: _description_
 
         .. code-block::
+
+            # (response mapping may be incomplete)
 
             {
                 'status': int,
@@ -479,6 +508,8 @@ class CenturyLink(ISP):
 
         .. code-block::
 
+            # (response mapping may be incomplete)
+
             {
                 'status': int,
                 'message': str,
@@ -570,6 +601,8 @@ class CenturyLink(ISP):
 
         .. code-block::
 
+            # (response mapping may be incomplete)
+
             {
                 'fixedWirelessQualified': bool,
                 'groupId': TBD,
@@ -612,13 +645,13 @@ class CenturyLink(ISP):
                         'bmOfferDetails': str,
                         'modem': [
                             {
-                                (truncated - SKUs)
+                                # (truncated - dict of SKUs)
                             }
                         ],
                         'groupId': TBD,
                         'vas': [
                             {
-                                (truncated - SKUs)
+                                # (truncated - dict of SKUs)
                             }
                         ]
                     }
@@ -692,10 +725,7 @@ class CenturyLink(ISP):
 class Verizon(ISP):
     def __init__(self, address_dict: dict):
 
-        self.address = address_dict
-        self.available = "Undetermined"
-        self.top_speed = "Undetermined"
-        self.metadata = {}
+        super().__init__(address_dict)
 
         print(" Verizon LTE ".ljust(LJUST, ".") + " ", end="", flush=True)
 
@@ -743,7 +773,7 @@ class Verizon(ISP):
 
         .. code-block::
 
-            (response mapping is incomplete)
+            # (response mapping is incomplete)
 
             {
                 'output': {

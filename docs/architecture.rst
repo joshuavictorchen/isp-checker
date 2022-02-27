@@ -1,13 +1,17 @@
 Architecture
 ------------
 
-Framework
-=========
-
 .. note::
 
-   Documentation is under construction. This section describes the program at a very high level, for now.
-   This is just a prototype, and the structure here is subject to change.
+   This program and its documentation are under construction.
+   This section describes the program at a very high level for now.
+
+   The prototype code currently uses a command line interface, but its 
+   structure and implementation are is subject to change.
+
+
+Framework
+=========
 
 This program is structured as follows:
 

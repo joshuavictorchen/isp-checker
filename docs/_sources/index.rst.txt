@@ -1,16 +1,15 @@
 Overview
 --------
 
-Internet Service Provider (ISP) serviceability data are not readily available for real estate listings
-on websites such as Zillow and Trulia.
+Internet Service Provider (ISP) serviceability data are not readily available for listings
+on real estate websites such as Zillow and Trulia.
 
-This means that potential homebuyers must access individual ISP websites and manually navigate
-through each user interface, one at a time, in order to retrieve the internet connectivity options
-for a given listing.
+This means that homebuyers must manually navigate through the web interface for each potential ISP,
+one at a time, in order to assess the internet connectivity options for a given listing.
 
-The **isp-checker** program provides a framework for determining ISP serviceability across providers
-at any address, without having to trudge through each ISP website's clunky UI,
-by directly accessing specific API endpoints to retrieve this data
+The **isp-checker** program provides a framework for retrieving ISP serviceability data across providers
+at any address - without having to trudge through each ISP website's clunky UI - 
+by directly accessing specific API endpoints to retrieve this data.
 
 The following ISPs and metadata are currently supported:
 
@@ -24,7 +23,7 @@ The following ISPs and metadata are currently supported:
 | Verizon LTE Home Internet | Yes                 | N/A*         |
 +---------------------------+---------------------+--------------+
 
-*\*all Verizon LTE Home Internet plans have download speeds of 25-50 Mbps*
+*\*all Verizon LTE Home Internet plans have stated download speeds of 25-50 Mbps*
 
 Contents
 --------

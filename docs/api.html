@@ -119,8 +119,13 @@
 <h2>ISP<a class="headerlink" href="#isp" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.ISP">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">ISP</span></span><a class="headerlink" href="#ispchecker.main.ISP" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">ISP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_address">
+<span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_address" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.main.ISP.get_availability">
 <span class="sig-name descname"><span class="pre">get_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_availability" title="Permalink to this definition"></a></dt>
@@ -132,6 +137,11 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_summary">
+<span class="sig-name descname"><span class="pre">get_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_summary" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.main.ISP.get_metadata">
 <span class="sig-name descname"><span class="pre">get_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_metadata" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -140,20 +150,22 @@
 
 <section id="spectrum">
 <h3>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline"></a></h3>
-<div class="admonition-todo admonition">
-<p class="admonition-title">TODO</p>
-<p><a class="reference external" href="https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers">This endpoint</a> returns a list of offers
-and internet speeds when provided with a <code class="docutils literal notranslate"><span class="pre">serviceLocationId</span></code> query, and <code class="docutils literal notranslate"><span class="pre">session-id</span></code> and <code class="docutils literal notranslate"><span class="pre">client-id</span></code> headers.</p>
-<p>These correspond to the <code class="docutils literal notranslate"><span class="pre">locationKey</span></code> and <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> attributes, respectively, in the parsed response dictionary from
-<a class="reference internal" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="ispchecker.main.Spectrum.parse_address_and_session_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_address_and_session_metadata</span></code></a>. This is not a typo;
-the Spectrum API is simply uninuitive.</p>
-<p>While this works in a browser setting, the requests return bad responses when queried programmatically. This is likely due to
-session/cookie issues, which have yet to be worked out.</p>
-</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.Spectrum">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.main.ISP</span></code></a></p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p><a class="reference external" href="https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers">This endpoint</a>
+returns a list of offers and internet speeds when provided with a <code class="docutils literal notranslate"><span class="pre">serviceLocationId</span></code> query,
+and <code class="docutils literal notranslate"><span class="pre">session-id</span></code> and <code class="docutils literal notranslate"><span class="pre">client-id</span></code> headers.</p>
+<p>These the query and header inputs correspond to the <code class="docutils literal notranslate"><span class="pre">locationKey</span></code> and <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> attributes,
+respectively, in the response dictionary from
+<a class="reference internal" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="ispchecker.main.Spectrum.parse_address_and_session_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_address_and_session_metadata</span></code></a>.
+This nomenclature inconsistency is a quirk of the Spectrum API.</p>
+<p>While this endpoint works well in a browser setting, the requests return bad responses when queried
+programmatically. This is likely due to session/cookie issues, which have yet to be worked out.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.main.Spectrum.retrieve_address_and_session_metadata">
 <span class="sig-name descname"><span class="pre">retrieve_address_and_session_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum.retrieve_address_and_session_metadata" title="Permalink to this definition"></a></dt>
@@ -174,7 +186,9 @@ session/cookie issues, which have yet to be worked out.</p>
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping may be incomplete)</span>
+
+<span class="p">{</span>
     <span class="s1">&#39;transactionId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;rdofMatchLevel&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;availableForCampaigns&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
@@ -291,7 +305,9 @@ session/cookie issues, which have yet to be worked out.</p>
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping may be incomplete)</span>
+
+<span class="p">{</span>
     <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;provider&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -344,7 +360,9 @@ session/cookie issues, which have yet to be worked out.</p>
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping may be incomplete)</span>
+
+<span class="p">{</span>
     <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;addrValInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -417,7 +435,9 @@ session/cookie issues, which have yet to be worked out.</p>
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping may be incomplete)</span>
+
+<span class="p">{</span>
     <span class="s1">&#39;fixedWirelessQualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="s1">&#39;groupId&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
     <span class="s1">&#39;dynamicRuleVersion&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
@@ -459,13 +479,13 @@ session/cookie issues, which have yet to be worked out.</p>
             <span class="s1">&#39;bmOfferDetails&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="s1">&#39;modem&#39;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="p">{</span>
-                    <span class="p">(</span><span class="n">truncated</span> <span class="o">-</span> <span class="n">SKUs</span><span class="p">)</span>
+                    <span class="c1"># (truncated - dict of SKUs)</span>
                 <span class="p">}</span>
             <span class="p">],</span>
             <span class="s1">&#39;groupId&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
             <span class="s1">&#39;vas&#39;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="p">{</span>
-                    <span class="p">(</span><span class="n">truncated</span> <span class="o">-</span> <span class="n">SKUs</span><span class="p">)</span>
+                    <span class="c1"># (truncated - dict of SKUs)</span>
                 <span class="p">}</span>
             <span class="p">]</span>
         <span class="p">}</span>
@@ -539,7 +559,7 @@ session/cookie issues, which have yet to be worked out.</p>
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">response</span> <span class="n">mapping</span> <span class="ow">is</span> <span class="n">incomplete</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping is incomplete)</span>
 
 <span class="p">{</span>
     <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -733,7 +753,7 @@ session/cookie issues, which have yet to be worked out.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-27 01:32:44.
+      <span class="lastupdated">Last updated on 2022-02-27 10:00:22.
       </span></p>
   </div>
 
