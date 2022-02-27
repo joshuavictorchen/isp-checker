@@ -19,12 +19,12 @@ This program is structured as follows:
    #. The provided address is parsed into dict of sub-components by
       :py:obj:`Address.parse_address<ispchecker.main.Address.parse_address>`.
    #. :py:obj:`Address.check_isps<ispchecker.main.Address.check_isps>` instantiates a series of
-      :py:obj:`ISP<ispchecker.main.ISP>`-based objects,
+      :py:obj:`ISP<ispchecker.isp.ISP>`-based objects,
       which perform unique ISP-specific actions to retrieve metadata (serviceability, supported internet speed, etc.)
       based on their own execution stacks.
    #. Results are printed to the console at runtime.
 
-More ISPs can be checked by simply creating new :py:obj:`ISP<ispchecker.main.ISP>`-based classes and adding them to the
+More ISPs can be checked by simply creating new :py:obj:`ISP<ispchecker.isp.ISP>`-based classes and adding them to the
 :py:obj:`Address.check_isps<ispchecker.main.Address.check_isps>` function.
 
 Methodology
@@ -50,7 +50,7 @@ High-level instructions
    #. Repeat the above steps with a comprehensive suite of addresses to determine
       the request/response syntax under different scenarios: addresses with different levels
       of service, addresses not serviced by the ISP, addresses not recognized by the website, etc.
-   #. Use the above findings to implement a new :py:obj:`ISP<ispchecker.main.ISP>`-based class into the
+   #. Use the above findings to implement a new :py:obj:`ISP<ispchecker.isp.ISP>`-based class into the
       `framework`_.
 
 Example walk-through

@@ -87,3 +87,30 @@ def list_to_string(value, leading_whitespaces=1):
         for i in range(1, len(value)):
             return_string += (" " * leading_whitespaces) + str(value[i]) + "\n"
         return return_string.strip()
+
+
+def print_isp_loader(isp_name, left_align=19):
+    """Prints a formatted line to the console, with no carriage return, in the form of:
+
+    .. code-block::
+
+         {isp_name} ..............
+
+    Args:
+        isp_name (str): Name of the ISP to be displayed.
+        left_align (int, optional): Width of the printed text in its entirety, minus the trailing whitespace. Defaults to 19.
+    """
+
+    print(f"\n {isp_name} ".ljust(left_align, ".") + " ", end="", flush=True)
+
+
+def print_divider():
+    """Prints a divider to the console in the form of:
+
+    .. code-block::
+
+         ---------------------------------------
+
+    """
+
+    print("\n ---------------------------------------")
