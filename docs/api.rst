@@ -28,7 +28,7 @@ Spectrum
 CenturyLink
 ^^^^^^^^^^^
 
-.. autoclass:: ispchecker.main.CenturyLink
+.. autoclass:: ispchecker.centurylink.CenturyLink
    :members:
    :undoc-members:
    :show-inheritance:
@@ -36,7 +36,7 @@ CenturyLink
 Verizon
 ^^^^^^^
 
-.. autoclass:: ispchecker.main.Verizon
+.. autoclass:: ispchecker.verizon.Verizon
    :members:
    :undoc-members:
    :show-inheritance:

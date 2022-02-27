@@ -19,35 +19,7 @@ class Verizon(ISP):
         print(self.available)
 
     def retrieve_plan_availability(self):
-
-        # home LTE availability is encompassed in this endpoint
-        url = "https://www.verizon.com/vfw/v1/check5GAvailability"
-
-        # the following headers must be provided for the request to succeed
-        headers = {"User-Agent": ""}
-
-        # json parameters for posting to the endpoint
-        data = {
-            "address1": self.address.get("street"),
-            "city": self.address.get("city"),
-            "state": self.address.get("state"),
-            "zipcode": self.address.get("zip"),
-        }
-
-        # post the request and obtain the response in dict form
-        response = self.session.post(
-            url,
-            headers=headers,
-            json=data,
-        )
-
-        return response
-
-    def parse_plan_availability(self, response: requests.Response):
         """_summary_
-
-        Args:
-            response (requests.Response): _description_
 
         Returns:
             _type_: _description_
@@ -171,11 +143,38 @@ class Verizon(ISP):
             }
         """
 
-        # TODO: response status/error checking, robust conversion to dict, etc.
-        #       (perhaps via ispchecker.tools)
+        # home LTE availability is encompassed in this endpoint
+        url = "https://www.verizon.com/vfw/v1/check5GAvailability"
 
-        # for now, just convert to dict with no error checking
-        response_dict = response.json()
+        # the following headers must be provided for the request to succeed
+        headers = {"User-Agent": ""}
+
+        # json parameters for posting to the endpoint
+        data = {
+            "address1": self.address.get("street"),
+            "city": self.address.get("city"),
+            "state": self.address.get("state"),
+            "zipcode": self.address.get("zip"),
+        }
+
+        # post the request and obtain the response in dict form
+        response = self.session.post(
+            url,
+            headers=headers,
+            json=data,
+        )
+
+        return t.convert_response(response)
+
+    def parse_plan_availability(self, response_dict: dict):
+        """_summary_
+
+        Args:
+            response (dict): _description_
+
+        Returns:
+            _type_: _description_
+        """
 
         # TODO: find reliable way of checking if address is valid
 

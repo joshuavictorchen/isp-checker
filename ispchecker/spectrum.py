@@ -20,38 +20,7 @@ class Spectrum(ISP):
         t.print_recursive_dict(self.summary)
 
     def retrieve_address_and_session_metadata(self):
-
-        # spectrum endpoint for obtaining address and session metadata
-        url = "https://location.spectrum.com/api-v2/svc/serviceability/v2"
-
-        # the following headers must be provided for the request to succeed
-        headers = {
-            "User-Agent": "",
-            "Accept": "application/json, text/plain, */*",
-            "Accept-Language": "en-US,en;q=0.5",
-            "Accept-Encoding": "gzip, deflate, br",
-            "Content-Type": "application/json",
-            "Origin": "https://location.spectrum.com",
-            "Connection": "keep-alive",
-        }
-
-        # json parameters for posting to the endpoint
-        data = {
-            "address": {
-                "line1": self.address.get("street"),
-                # "line2": <-- unused for now
-                "postalCode": self.address.get("zip"),
-            }
-        }
-
-        # post the request and return the response
-        return self.session.post(url, json=data, headers=headers)
-
-    def parse_address_and_session_metadata(self, response: requests.Response):
-        """placeholder text
-
-        Args:
-            response (requests.Response): _description_
+        """_summary_
 
         Returns:
             _type_: _description_
@@ -125,11 +94,41 @@ class Spectrum(ISP):
             }
         """
 
-        # TODO: response status/error checking, robust conversion to dict, etc.
-        #       (perhaps via ispchecker.tools)
+        # spectrum endpoint for obtaining address and session metadata
+        url = "https://location.spectrum.com/api-v2/svc/serviceability/v2"
 
-        # for now, just convert to dict with no error checking
-        response_dict = response.json()
+        # the following headers must be provided for the request to succeed
+        headers = {
+            "User-Agent": "",
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Content-Type": "application/json",
+            "Origin": "https://location.spectrum.com",
+            "Connection": "keep-alive",
+        }
+
+        # json parameters for posting to the endpoint
+        data = {
+            "address": {
+                "line1": self.address.get("street"),
+                # "line2": <-- unused for now
+                "postalCode": self.address.get("zip"),
+            }
+        }
+
+        # post the request and return the response
+        return t.convert_response(self.session.post(url, json=data, headers=headers))
+
+    def parse_address_and_session_metadata(self, response_dict):
+        """placeholder text
+
+        Args:
+            response (dict): _description_
+
+        Returns:
+            _type_: _description_
+        """
 
         # get the relevant Spectrum address metadata by looping through the addresses list
         # and comparing: address line, city, territory (state), zip
@@ -218,4 +217,6 @@ class Spectrum(ISP):
             "Connection": "keep-alive",
         }
 
-        return self.session.get(url, headers=headers, params=querystring)
+        return t.convert_response(
+            self.session.get(url, headers=headers, params=querystring)
+        )

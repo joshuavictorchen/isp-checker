@@ -76,13 +76,7 @@ class CenturyLink(ISP):
 
         url = "https://shop.centurylink.com/uas/oauth"
         headers = {"Connection": "keep-alive"}
-        response = self.session.post(url, headers=headers)
-
-        # TODO: response status/error checking, robust conversion to dict, etc.
-        #       (perhaps via ispchecker.tools)
-
-        # for now, just convert to dict with no error checking
-        response_dict = response.json()
+        response_dict = t.convert_response(self.session.post(url, headers=headers))
 
         # subsequent API requests use access_token prepended by "Bearer "
         access_token = "Bearer " + response_dict.get("access_token")
@@ -121,23 +115,17 @@ class CenturyLink(ISP):
         params = (("addr", self.address.get("full_address")),)
         response = self.session.get(url, headers=headers, params=params)
 
-        return response
+        return t.convert_response(response)
 
-    def parse_address_metadata(self, response: requests.Response):
+    def parse_address_metadata(self, response_dict: dict):
         """_summary_
 
         Args:
-            response (requests.Response): _description_
+            response (dict): _description_
 
         Returns:
             _type_: _description_
         """
-
-        # TODO: response status/error checking, robust conversion to dict, etc.
-        #       (perhaps via ispchecker.tools)
-
-        # for now, just convert to dict with no error checking
-        response_dict = response.json()
 
         # if no predicted addresses found, then return None
         if len(response_dict.get("predictedAddressList")) == 0:
@@ -256,23 +244,17 @@ class CenturyLink(ISP):
             json=data,
         )
 
-        return response
+        return t.convert_response(response)
 
-    def parse_wireCenter(self, response: requests.Response):
+    def parse_wireCenter(self, response_dict: dict):
         """_summary_
 
         Args:
-            response (requests.Response): _description_
+            response (dict): _description_
 
         Returns:
             _type_: _description_
         """
-
-        # TODO: response status/error checking, robust conversion to dict, etc.
-        #       (perhaps via ispchecker.tools)
-
-        # for now, just convert to dict with no error checking
-        response_dict = response.json()
 
         # ensure the system has found an exact match for the address
         # TODO: move this message string to a settings/config file
@@ -391,23 +373,17 @@ class CenturyLink(ISP):
             json=data,
         )
 
-        return response
+        return t.convert_response(response)
 
-    def parse_offerings(self, response: requests.Response):
+    def parse_offerings(self, response_dict: dict):
         """_summary_
 
         Args:
-            response (requests.Response): _description_
+            response (dict): _description_
 
         Returns:
             _type_: _description_
         """
-
-        # TODO: response status/error checking, robust conversion to dict, etc.
-        #       (perhaps via ispchecker.tools)
-
-        # for now, just convert to dict with no error checking
-        response_dict = response.json()
 
         # get the top speed in mbps
         # CenturyLink lists the fastest offer first, per their website
