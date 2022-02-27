@@ -1,18 +1,22 @@
 Overview
 --------
 
-.. warning::
+Internet Service Provider (ISP) serviceability data are not readily available for real estate listings
+on websites such as Zillow and Trulia.
 
-    This is a new project. Performance may be neither accurate nor robust.
+Potential homebuyers must access individual ISP websites and manually navigate through their user interfaces
+one at a time in order to retrieve the internet connectivity options for a given listing.
 
-This program provides a framework for checking ISP serviceability at a given address.
+The **isp-checker** program provides a framework for determining ISP serviceability across providers at any
+given address by directly accessing specific API endpoints to retrieve this data, without having to trudge
+through each ISP website's clunky UI.
 
 The following ISPs and metadata are currently supported:
 
 +---------------------------+---------------------+--------------+
 | Internet Service Provider | Availability Status | Plan Details |
 +===========================+=====================+==============+
-| Spectrum                  | Yes                 | No           |
+| Spectrum                  | Yes                 | Coming soon  |
 +---------------------------+---------------------+--------------+
 | CenturyLink               | Yes                 | Yes          |
 +---------------------------+---------------------+--------------+
