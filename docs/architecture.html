@@ -46,6 +46,11 @@
 <li class="toctree-l1"><a class="reference internal" href="manual.html">User Manual</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Architecture</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#framework">Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#methodology">Methodology</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-instructions">High-level instructions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-walk-through">Example walk-through</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#tooling">Tooling</a></li>
 </ul>
 </li>
@@ -78,32 +83,66 @@
              
   <section id="architecture">
 <h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline"></a></h1>
-<section id="framework">
-<h2>Framework<a class="headerlink" href="#framework" title="Permalink to this headline"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Documentation is under construction. This section describes the program at a very high level, for now.
-This is just a prototype, and the structure here is subject to change.</p>
+<p>This program and its documentation are under construction.
+This section describes the program at a very high level for now.</p>
+<p>The prototype code currently uses a command line interface, but its
+structure and implementation are is subject to change.</p>
 </div>
+<section id="framework">
+<h2>Framework<a class="headerlink" href="#framework" title="Permalink to this headline"></a></h2>
 <p>This program is structured as follows:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>User executes the program and provides a formatted, case-insensitive address via the command line</p></li>
+<li><p>User executes the program and provides a formatted, case-insensitive address via the command line.</p></li>
 <li><p>The provided address is parsed into dict of sub-components by
-<a class="reference internal" href="api.html#ispchecker.main.Address.parse_address" title="ispchecker.main.Address.parse_address"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.parse_address</span></code></a></p></li>
+<a class="reference internal" href="api.html#ispchecker.main.Address.parse_address" title="ispchecker.main.Address.parse_address"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.parse_address</span></code></a>.</p></li>
 <li><p><a class="reference internal" href="api.html#ispchecker.main.Address.check_isps" title="ispchecker.main.Address.check_isps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.check_isps</span></code></a> instantiates a series of
 <a class="reference internal" href="api.html#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISP</span></code></a>-based objects,
 which perform unique ISP-specific actions to retrieve metadata (serviceability, supported internet speed, etc.)
-based on their own execution stacks</p></li>
-<li><p>Results are printed to the console at runtime</p></li>
+based on their own execution stacks.</p></li>
+<li><p>Results are printed to the console at runtime.</p></li>
 </ol>
 </div></blockquote>
 <p>More ISPs can be checked by simply creating new <a class="reference internal" href="api.html#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISP</span></code></a>-based classes and adding them to the
 <a class="reference internal" href="api.html#ispchecker.main.Address.check_isps" title="ispchecker.main.Address.check_isps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.check_isps</span></code></a> function.</p>
 </section>
+<section id="methodology">
+<h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline"></a></h2>
+<p>The key to directly retrieving ISP serviceability data via API requests lies in figuring out
+<em>what</em> API endpoints exist in the first place, and identifying which of those endpoints
+are required to obtain a list of service plans and internet speeds for a given address.</p>
+<section id="high-level-instructions">
+<h3>High-level instructions<a class="headerlink" href="#high-level-instructions" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Navigate to the ISP’s website using a broswer of choice.</p></li>
+<li><p>Open the browser’s network monitor
+(<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor">example</a>).</p></li>
+<li><p>Using a sample address, navigate through the website’s UI to determine
+if the address is serviced by the provider - and the available service plans and internet speeds, if so.</p></li>
+<li><p>Inspect the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XHR objects</a>
+that were passed between the server and the client during the previous step.
+Using the request and response attributes of those XHR objects, create an API request structure
+that can be used to retrieve serviceability data for <em>any</em> address for this ISP. Usually, more than one
+request is needed to get from a street address to an offerings list.</p></li>
+<li><p>Repeat the above steps with a comprehensive suite of addresses to determine
+the request/response syntax under different scenarios: addresses with different levels
+of service, addresses not serviced by the ISP, addresses not recognized by the website, etc.</p></li>
+<li><p>Use the above findings to implement a new <a class="reference internal" href="api.html#ispchecker.main.ISP" title="ispchecker.main.ISP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISP</span></code></a>-based class into the
+<a class="reference internal" href="#framework">framework</a>.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="example-walk-through">
+<h3>Example walk-through<a class="headerlink" href="#example-walk-through" title="Permalink to this headline"></a></h3>
+<p><em>Coming soon.</em></p>
+</section>
+</section>
 <section id="tooling">
 <h2>Tooling<a class="headerlink" href="#tooling" title="Permalink to this headline"></a></h2>
-<p>The following tools are used in the construction of this program:</p>
+<p>The following tools are used in the construction and maintenance of this program:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 48%" />
@@ -115,20 +154,24 @@ based on their own execution stacks</p></li>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Unit tests</p></td>
+<tr class="row-even"><td><p>Unit testing</p></td>
 <td><p>Pytest</p></td>
 </tr>
 <tr class="row-odd"><td><p>Linting</p></td>
 <td><p>Black</p></td>
 </tr>
-<tr class="row-even"><td><p>CI automation</p></td>
+<tr class="row-even"><td><p>Documentation</p></td>
+<td><p>Sphinx* + RTD</p></td>
+</tr>
+<tr class="row-odd"><td><p>CI automation</p></td>
 <td><p>Tox</p></td>
 </tr>
-<tr class="row-odd"><td><p>CI execution</p></td>
+<tr class="row-even"><td><p>CI execution</p></td>
 <td><p>GitHub Actions</p></td>
 </tr>
 </tbody>
 </table>
+<p><em>*the default make.bat file that is created with sphinx-quickstart has been customized for this program</em></p>
 </section>
 </section>
 
@@ -144,7 +187,7 @@ based on their own execution stacks</p></li>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-26 16:43:55.
+      <span class="lastupdated">Last updated on 2022-02-27 11:44:51.
       </span></p>
   </div>
 

@@ -46,10 +46,12 @@
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#address">Address</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#isp">ISP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#spectrum">Spectrum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#centurylink">CenturyLink</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#verizon">Verizon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#isp">ISP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spectrum">Spectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#centurylink">CenturyLink</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verizon">Verizon</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-ispchecker.tools">Tools</a></li>
 </ul>
 </li>
@@ -88,11 +90,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Address</span></span><a class="headerlink" href="#ispchecker.main.Address" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Placeholder text.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>full_address</strong> (<em>str</em>) – Placeholder text.</p>
-</dd>
-</dl>
 <p><strong>Relevant instance attributes:</strong></p>
 <blockquote>
 <div><ul class="simple">
@@ -117,8 +114,29 @@
 <h2>ISP<a class="headerlink" href="#isp" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.ISP">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">ISP</span></span><a class="headerlink" href="#ispchecker.main.ISP" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">ISP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for ISPs. More documentation TBD.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>address_dict</strong> (<em>dict</em>) – <p>Dictionary of address attributes in the following form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;full_address&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;street&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;zip&#39;</span><span class="p">:</span> <span class="nb">str</span> <span class="c1"># (5 digits)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_address">
+<span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_address" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.main.ISP.get_availability">
 <span class="sig-name descname"><span class="pre">get_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_availability" title="Permalink to this definition"></a></dt>
@@ -130,26 +148,19 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.ISP.get_summary">
+<span class="sig-name descname"><span class="pre">get_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_summary" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.main.ISP.get_metadata">
 <span class="sig-name descname"><span class="pre">get_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.ISP.get_metadata" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</section>
 <section id="spectrum">
-<h2>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline"></a></h2>
-<div class="admonition-todo admonition">
-<p class="admonition-title">TODO</p>
-<p>The <a class="reference external" href="https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers">https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers</a> endpoint returns a list of offers
-and internet speeds, given a <code class="docutils literal notranslate"><span class="pre">serviceLocationId</span></code> query, and <code class="docutils literal notranslate"><span class="pre">session-id</span></code> and <code class="docutils literal notranslate"><span class="pre">client-id</span></code> headers.</p>
-<p>These correspond to the <code class="docutils literal notranslate"><span class="pre">locationKey</span></code> and <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> attributes, respectively, in the parsed response dictionary from
-<a class="reference internal" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="ispchecker.main.Spectrum.parse_address_and_session_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_address_and_session_metadata</span></code></a>
-(this is not a typo; the names are that uninuitive).</p>
-<p>While this works in a browser setting, the requests return bad responses when queried programmatically. Being able to query
-this endpoint will enable inspection of offered internet speeds, and better error checking.</p>
-<p>More details TBD.</p>
-</div>
+<h3>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.Spectrum">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum" title="Permalink to this definition"></a></dt>
@@ -174,7 +185,9 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping may be incomplete)</span>
+
+<span class="p">{</span>
     <span class="s1">&#39;transactionId&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;rdofMatchLevel&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;availableForCampaigns&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
@@ -241,11 +254,43 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 </div>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.main.Spectrum.get_offers">
+<span class="sig-name descname"><span class="pre">get_offers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locationKey</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transactionId</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Spectrum.get_offers" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p><a class="reference external" href="https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers">This endpoint</a>
+returns a list of offers and internet speeds when provided with a <code class="docutils literal notranslate"><span class="pre">serviceLocationId</span></code> query,
+and <code class="docutils literal notranslate"><span class="pre">session-id</span></code> and <code class="docutils literal notranslate"><span class="pre">client-id</span></code> headers.</p>
+<p>These the query and header inputs correspond to the <code class="docutils literal notranslate"><span class="pre">locationKey</span></code> and <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> attributes,
+respectively, in the response dictionary from
+<a class="reference internal" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="ispchecker.main.Spectrum.parse_address_and_session_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_address_and_session_metadata</span></code></a>.
+This nomenclature inconsistency is a quirk of the Spectrum API.</p>
+<p>While this endpoint works well in a browser setting, the requests return bad responses when queried
+programmatically. This is likely due to session/cookie issues, which have yet to be worked out.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>locationKey</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>transactionId</strong> (<em>_type_</em>) – _description_</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
 <section id="centurylink">
-<h2>CenturyLink<a class="headerlink" href="#centurylink" title="Permalink to this headline"></a></h2>
+<h3>CenturyLink<a class="headerlink" href="#centurylink" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.CenturyLink">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">CenturyLink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink" title="Permalink to this definition"></a></dt>
@@ -291,7 +336,9 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping may be incomplete)</span>
+
+<span class="p">{</span>
     <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;provider&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -344,7 +391,9 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping may be incomplete)</span>
+
+<span class="p">{</span>
     <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="s1">&#39;addrValInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -417,7 +466,9 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping may be incomplete)</span>
+
+<span class="p">{</span>
     <span class="s1">&#39;fixedWirelessQualified&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="s1">&#39;groupId&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
     <span class="s1">&#39;dynamicRuleVersion&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
@@ -459,13 +510,13 @@ this endpoint will enable inspection of offered internet speeds, and better erro
             <span class="s1">&#39;bmOfferDetails&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="s1">&#39;modem&#39;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="p">{</span>
-                    <span class="p">(</span><span class="n">truncated</span> <span class="o">-</span> <span class="n">SKUs</span><span class="p">)</span>
+                    <span class="c1"># (truncated - dict of SKUs)</span>
                 <span class="p">}</span>
             <span class="p">],</span>
             <span class="s1">&#39;groupId&#39;</span><span class="p">:</span> <span class="n">TBD</span><span class="p">,</span>
             <span class="s1">&#39;vas&#39;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="p">{</span>
-                    <span class="p">(</span><span class="n">truncated</span> <span class="o">-</span> <span class="n">SKUs</span><span class="p">)</span>
+                    <span class="c1"># (truncated - dict of SKUs)</span>
                 <span class="p">}</span>
             <span class="p">]</span>
         <span class="p">}</span>
@@ -514,7 +565,7 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 
 </section>
 <section id="verizon">
-<h2>Verizon<a class="headerlink" href="#verizon" title="Permalink to this headline"></a></h2>
+<h3>Verizon<a class="headerlink" href="#verizon" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.Verizon">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Verizon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon" title="Permalink to this definition"></a></dt>
@@ -539,7 +590,7 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 <dd class="field-odd"><p>_type_</p>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">response</span> <span class="n">mapping</span> <span class="ow">is</span> <span class="n">incomplete</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># (response mapping is incomplete)</span>
 
 <span class="p">{</span>
     <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -661,6 +712,7 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 </dd></dl>
 
 </section>
+</section>
 <section id="module-ispchecker.tools">
 <span id="tools"></span><h2>Tools<a class="headerlink" href="#module-ispchecker.tools" title="Permalink to this headline"></a></h2>
 <dl class="py function">
@@ -732,7 +784,7 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-26 16:43:55.
+      <span class="lastupdated">Last updated on 2022-02-27 11:44:51.
       </span></p>
   </div>
 
