@@ -116,10 +116,12 @@ are required to obtain a list of service plans and internet speeds for a given a
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>Navigate to the ISP’s website using a broswer of choice.</p></li>
-<li><p>Open the browser’s network inspector.</p></li>
+<li><p>Open the browser’s network monitor
+(<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor">example</a>).</p></li>
 <li><p>Using a sample address, navigate through the website’s UI to determine
 if the address is serviced by the provider - and the available service plans and internet speeds, if so.</p></li>
-<li><p>Inspect the XHR objects that were passed between the server and the client during the previous step.
+<li><p>Inspect the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XHR objects</a>
+that were passed between the server and the client during the previous step.
 Using the request and response attributes of those XHR objects, create an API request structure
 that can be used to retrieve serviceability data for <em>any</em> address for this ISP. Usually, more than one
 request is needed to get from a street address to an offerings list.</p></li>
@@ -183,7 +185,7 @@ of service, addresses not serviced by the ISP, addresses not recognized by the w
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-27 00:52:26.
+      <span class="lastupdated">Last updated on 2022-02-27 01:32:44.
       </span></p>
   </div>
 

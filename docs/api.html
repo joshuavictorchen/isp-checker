@@ -46,10 +46,12 @@
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#address">Address</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#isp">ISP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#spectrum">Spectrum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#centurylink">CenturyLink</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#verizon">Verizon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#isp">ISP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spectrum">Spectrum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#centurylink">CenturyLink</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verizon">Verizon</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-ispchecker.tools">Tools</a></li>
 </ul>
 </li>
@@ -136,19 +138,17 @@
 
 </dd></dl>
 
-</section>
 <section id="spectrum">
-<h2>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline"></a></h2>
+<h3>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline"></a></h3>
 <div class="admonition-todo admonition">
 <p class="admonition-title">TODO</p>
-<p>The <a class="reference external" href="https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers">https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers</a> endpoint returns a list of offers
-and internet speeds, given a <code class="docutils literal notranslate"><span class="pre">serviceLocationId</span></code> query, and <code class="docutils literal notranslate"><span class="pre">session-id</span></code> and <code class="docutils literal notranslate"><span class="pre">client-id</span></code> headers.</p>
+<p><a class="reference external" href="https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers">This endpoint</a> returns a list of offers
+and internet speeds when provided with a <code class="docutils literal notranslate"><span class="pre">serviceLocationId</span></code> query, and <code class="docutils literal notranslate"><span class="pre">session-id</span></code> and <code class="docutils literal notranslate"><span class="pre">client-id</span></code> headers.</p>
 <p>These correspond to the <code class="docutils literal notranslate"><span class="pre">locationKey</span></code> and <code class="docutils literal notranslate"><span class="pre">transactionId</span></code> attributes, respectively, in the parsed response dictionary from
-<a class="reference internal" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="ispchecker.main.Spectrum.parse_address_and_session_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_address_and_session_metadata</span></code></a>
-(this is not a typo; the names are that uninuitive).</p>
-<p>While this works in a browser setting, the requests return bad responses when queried programmatically. Being able to query
-this endpoint will enable inspection of offered internet speeds, and better error checking.</p>
-<p>More details TBD.</p>
+<a class="reference internal" href="#ispchecker.main.Spectrum.parse_address_and_session_metadata" title="ispchecker.main.Spectrum.parse_address_and_session_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_address_and_session_metadata</span></code></a>. This is not a typo;
+the Spectrum API is simply uninuitive.</p>
+<p>While this works in a browser setting, the requests return bad responses when queried programmatically. This is likely due to
+session/cookie issues, which have yet to be worked out.</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.Spectrum">
@@ -245,7 +245,7 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 
 </section>
 <section id="centurylink">
-<h2>CenturyLink<a class="headerlink" href="#centurylink" title="Permalink to this headline"></a></h2>
+<h3>CenturyLink<a class="headerlink" href="#centurylink" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.CenturyLink">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">CenturyLink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.CenturyLink" title="Permalink to this definition"></a></dt>
@@ -514,7 +514,7 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 
 </section>
 <section id="verizon">
-<h2>Verizon<a class="headerlink" href="#verizon" title="Permalink to this headline"></a></h2>
+<h3>Verizon<a class="headerlink" href="#verizon" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.main.Verizon">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Verizon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Verizon" title="Permalink to this definition"></a></dt>
@@ -661,6 +661,7 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 </dd></dl>
 
 </section>
+</section>
 <section id="module-ispchecker.tools">
 <span id="tools"></span><h2>Tools<a class="headerlink" href="#module-ispchecker.tools" title="Permalink to this headline"></a></h2>
 <dl class="py function">
@@ -732,7 +733,7 @@ this endpoint will enable inspection of offered internet speeds, and better erro
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-27 00:52:26.
+      <span class="lastupdated">Last updated on 2022-02-27 01:32:44.
       </span></p>
   </div>
 

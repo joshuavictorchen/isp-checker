@@ -34,10 +34,12 @@ High-level instructions
 ^^^^^^^^^^^^^^^^^^^^^^^
 
    #. Navigate to the ISP's website using a broswer of choice.
-   #. Open the browser's network inspector.
+   #. Open the browser's network monitor
+      (`example <https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor>`__).
    #. Using a sample address, navigate through the website's UI to determine
       if the address is serviced by the provider - and the available service plans and internet speeds, if so.
-   #. Inspect the XHR objects that were passed between the server and the client during the previous step.
+   #. Inspect the `XHR objects <https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest>`__
+      that were passed between the server and the client during the previous step.
       Using the request and response attributes of those XHR objects, create an API request structure
       that can be used to retrieve serviceability data for *any* address for this ISP. Usually, more than one
       request is needed to get from a street address to an offerings list.
