@@ -22,14 +22,14 @@ Navigate into a directory of your choice and grab the code from this repository:
 
 ## Use
 
-Once installed, the `ispcheck` command can be executed from any working directory to check for ISP availability at a given address.
+Once installed, the `ispcheck` command can be executed from any working directory to check for ISP availability at a given address, or for a given Zillow or Trulia listing.
 
-The program is currently in its early stages, and is not very robust. The command MUST be entered in the following form, with no deviation. Two-liner addresses are not yet supported for manual address entry.
+The program is currently in its early stages, and is not very robust. The command MUST be entered in one of the following forms, with no deviation. Two-liner addresses are not yet supported for manual address entry.
 
     ispcheck [street address], [city name], [state abbreviation], [5 digit zip code]
     - or -
     ispcheck [URL for Zillow listing]
-    -or-
+    - or -
     ispcheck [URL for Trulia listing]
 
 For example:
