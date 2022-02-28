@@ -30,6 +30,10 @@ The program is currently in its early stages, and is not very robust. The comman
 
 For example:
 
-    ispcheck 123 Neutronland Road, Reactorville, NC 12345
+    ispcheck 123 neutronland road, reactorville, nc 12345
+
+Sample output:
+
+![sample output](_images/example1.png)
 
 Refer to the [documentation](https://joshuavictorchen.github.io/isp-checker/) for further instructions.

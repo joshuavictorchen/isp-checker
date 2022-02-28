@@ -8,7 +8,7 @@ class Verizon(ISP):
 
         super().__init__(address_dict)
 
-        t.print_isp_loader("Verizon LTE")
+        t.print_isp_loader("Verizon Home")
 
         # retrieve plan availability
         r = self.retrieve_plan_availability()
@@ -17,6 +17,9 @@ class Verizon(ISP):
         self.metadata.update(self.parse_plan_availability(r))
 
         print(self.available)
+
+        if self.summary != {}:
+            t.print_recursive_dict(self.summary)
 
     def retrieve_plan_availability(self):
         """_summary_
@@ -179,13 +182,17 @@ class Verizon(ISP):
         # TODO: find reliable way of checking if address is valid
 
         # check if 4G LTE home internet is available at address
-        self.available = response_dict.get("output").get("qualified4GHome")
-
-        # if available, then speed is 50 mbps
-        # TODO: find this value dynamically via another API request
-        if self.available:
-            self.top_speed = 50
+        if response_dict.get("output").get("qualified4GHome"):
+            self.available = "Available"
         else:
-            self.top_speed = 0
+            self.available = "No service"
+
+        self.summary.update(
+            {
+                "addressLine1": response_dict.get("output").get("addressLine1"),
+                "zipCode": response_dict.get("output").get("zipCode"),
+                "qualified4GHome": response_dict.get("output").get("qualified4GHome"),
+            }
+        )
 
         return response_dict
