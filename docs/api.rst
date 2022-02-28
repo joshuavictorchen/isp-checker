@@ -12,7 +12,7 @@ Address
 ISP
 ===
 
-.. autoclass:: ispchecker.main.ISP
+.. autoclass:: ispchecker.isp.ISP
    :members:
    :undoc-members:
    :show-inheritance:
@@ -20,7 +20,7 @@ ISP
 Spectrum
 ^^^^^^^^
    
-.. autoclass:: ispchecker.main.Spectrum
+.. autoclass:: ispchecker.spectrum.Spectrum
    :members:
    :undoc-members:
    :show-inheritance:
@@ -28,7 +28,7 @@ Spectrum
 CenturyLink
 ^^^^^^^^^^^
 
-.. autoclass:: ispchecker.main.CenturyLink
+.. autoclass:: ispchecker.centurylink.CenturyLink
    :members:
    :undoc-members:
    :show-inheritance:
@@ -36,7 +36,7 @@ CenturyLink
 Verizon
 ^^^^^^^
 
-.. autoclass:: ispchecker.main.Verizon
+.. autoclass:: ispchecker.verizon.Verizon
    :members:
    :undoc-members:
    :show-inheritance:
