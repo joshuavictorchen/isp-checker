@@ -4,11 +4,9 @@ Architecture
 .. note::
 
    This program and its documentation are under construction.
-   This section describes the program at a very high level for now.
 
-   The prototype code currently uses a command line interface, but its 
-   structure and implementation are is subject to change.
-
+   The prototype code is currently geared toward a simple command line interface,
+   with the intent of scaling up after basic features have been fleshed out.
 
 Framework
 =========
