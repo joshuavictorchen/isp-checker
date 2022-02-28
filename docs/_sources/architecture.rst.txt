@@ -17,18 +17,16 @@ This program is structured as follows:
       - or a full URL to a Zillow or Trulia listing.
 
    #. :py:obj:`Address.parse_address<ispchecker.address.Address.parse_address>` parses the provided
-      address into a dictionary of sub-components (street, city, state, zip).
-      
-      a. If a URL is provided, then the listing's address is first parsed out of the URL.
+      address or listing URL into a dictionary of address sub-components (street, city, state, zip).
 
-   #. :py:obj:`Address.check_isps<ispchecker.address.Address.check_isps>` instantiates a series of
-      :py:obj:`ISP<ispchecker.isp.ISP>`-based objects, which perform unique ISP-specific actions
-      to retrieve metadata (serviceability, supported internet speed, etc.) based on their own execution stacks.
+   #. :py:obj:`Address.check_isps<ispchecker.address.Address.check_isps>` executes unique ISP-specific routines on
+      a series of instantiated :py:obj:`ISP<ispchecker.isp.ISP>`-based objects to retrieve metadata on
+      serviceability, supported internet speed, etc.
 
    #. Results are printed to the console at runtime.
 
 More ISPs can be checked by simply creating new :py:obj:`ISP<ispchecker.isp.ISP>`-based classes and adding them to the
-:py:obj:`Address.check_isps<ispchecker.address.Address.check_isps>` function.
+:py:obj:`Address.check_isps<ispchecker.address.Address.check_isps>` call.
 
 Methodology
 ===========

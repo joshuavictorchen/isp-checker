@@ -1,25 +1,15 @@
-import requests
 from ispchecker import tools as t
 from ispchecker.isp import ISP
 
 
 class Spectrum(ISP):
-    def __init__(self, address_dict: dict):
-
-        super().__init__(address_dict)
-
-        t.print_isp_loader("Spectrum")
+    def main_routine(self):
 
         # retrieve address/session response
         r = self.retrieve_address_and_session_metadata()
 
         # get dict from response, parse availability, and update self.metadata
         self.metadata.update(self.parse_address_and_session_metadata(r))
-
-        print(self.available)
-
-        if self.summary != {}:
-            t.print_recursive_dict(self.summary)
 
     def retrieve_address_and_session_metadata(self):
         """_summary_

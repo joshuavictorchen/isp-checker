@@ -1,25 +1,15 @@
-import requests
 from ispchecker import tools as t
 from ispchecker.isp import ISP
 
 
 class Verizon(ISP):
-    def __init__(self, address_dict: dict):
-
-        super().__init__(address_dict)
-
-        t.print_isp_loader("Verizon Home")
+    def main_routine(self):
 
         # retrieve plan availability
         r = self.retrieve_plan_availability()
 
         # get dict from response, parse availability, and update self.metadata
         self.metadata.update(self.parse_plan_availability(r))
-
-        print(self.available)
-
-        if self.summary != {}:
-            t.print_recursive_dict(self.summary)
 
     def retrieve_plan_availability(self):
         """_summary_

@@ -1,42 +1,52 @@
 import requests
-from abc import ABC
+import warnings
+from abc import ABC, abstractmethod
+from cryptography.utils import CryptographyDeprecationWarning
 from ispchecker import tools as t
+
+# filter irrelevant deprecation warnings, which pop up when using the requests module
+# https://github.com/pyca/cryptography/issues/6456#issue-1033689568
+warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
 
 
 class ISP(ABC):
-    """Base class for ISPs. More documentation TBD.
+    """Base class for ISPs. More documentation TBD."""
 
-    Args:
-        address_dict (dict): Dictionary of address attributes in the following form:
+    def __init__(self):
 
-            .. code-block::
-
-                {
-                    'full_address': str,
-                    'street': str,
-                    'city': str,
-                    'state': str,
-                    'zip': str # (5 digits)
-                }
-    """
-
-    def __init__(self, address_dict: dict):
-
-        t.print_divider()
         self.session = requests.Session()
-        self.address = address_dict
         self.available = None
         self.summary = {}
         self.metadata = {}
 
-    def get_address(self):
-        return self.address
+    @abstractmethod
+    def main_routine(self):
+        pass
 
-    def get_availability(self):
-        return self.available
+    def check_availability(self, address_dict: dict):
+        """_summary_
 
-    def get_summary(self):
-        return self.summary
+        Args:
+            address_dict (dict): Dictionary of address attributes in the following form:
 
-    def get_metadata(self):
-        return self.metadata
+                .. code-block::
+
+                    {
+                        'full_address': str,
+                        'street': str,
+                        'city': str,
+                        'state': str,
+                        'zip': str # (5 digits)
+                    }
+        """
+
+        t.print_divider()
+        t.print_isp_loader(type(self).__name__)
+
+        self.address = address_dict
+
+        self.main_routine()
+
+        print(self.available)
+        if self.summary != {}:
+            t.print_recursive_dict(self.summary)

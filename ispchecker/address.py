@@ -1,7 +1,4 @@
 import sys
-from ispchecker.spectrum import Spectrum
-from ispchecker.centurylink import CenturyLink
-from ispchecker.verizon import Verizon
 
 
 class Address:
@@ -17,21 +14,14 @@ class Address:
         self.address = {}
         self.isps = {}
 
-    def check_isps(self):
+    def check_isps(self, isp_list):
 
         if self.address == {}:
             print("\n Address is empty - please parse in an address first.")
             return None
 
-        isps = {
-            "Spectrum": Spectrum(self.address),
-            "CenturyLink": CenturyLink(self.address),
-            "Verizon LTE": Verizon(self.address),
-        }
-
-        self.isps = isps
-
-        return isps
+        for i in isp_list:
+            i.check_availability(self.address)
 
     def parse_address(self, full_address):
 
