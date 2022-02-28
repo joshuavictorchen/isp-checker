@@ -69,7 +69,7 @@ class Address:
             _type_: _description_
         """
 
-        # this is a temporary stop-gap measure for parsing addresses from URLs
+        # this is a temporary, janky, stop-gap measure for parsing addresses from URLs
 
         # get list of address components (strings) from URL
         #   1. remove query params (everything after '?')
@@ -84,6 +84,12 @@ class Address:
             url_index = 4
             state_index = -2
             final_trim = None
+
+            # zillow links come in two forms, depending on if the listing was searched for directly,
+            # or if the listing was shared via the 'get shareable link' feature
+            # perform some string cleaning to force consistency for zillow URLs
+            full_address = full_address.replace(",", "").replace("_rb", "")
+
         elif site == "trulia":
             url_index = 6
             state_index = -4
