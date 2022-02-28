@@ -1,5 +1,5 @@
 import unittest
-from ispchecker.main import Address
+from ispchecker.address import Address
 
 STREET = "street"
 CITY = "city"

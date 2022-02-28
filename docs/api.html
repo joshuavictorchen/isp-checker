@@ -86,8 +86,8 @@
 <section id="address">
 <h2>Address<a class="headerlink" href="#address" title="Permalink to this headline"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="ispchecker.main.Address">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.main.</span></span><span class="sig-name descname"><span class="pre">Address</span></span><a class="headerlink" href="#ispchecker.main.Address" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.address.Address">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.address.</span></span><span class="sig-name descname"><span class="pre">Address</span></span><a class="headerlink" href="#ispchecker.address.Address" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Placeholder text.</p>
 <p><strong>Relevant instance attributes:</strong></p>
@@ -98,14 +98,34 @@
 </ul>
 </div></blockquote>
 <dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.main.Address.parse_address">
-<span class="sig-name descname"><span class="pre">parse_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address.parse_address" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.address.Address.check_isps">
+<span class="sig-name descname"><span class="pre">check_isps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.address.Address.check_isps" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.main.Address.check_isps">
-<span class="sig-name descname"><span class="pre">check_isps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.main.Address.check_isps" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.address.Address.parse_address">
+<span class="sig-name descname"><span class="pre">parse_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">full_address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.address.Address.parse_address" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.address.Address.parse_url">
+<span class="sig-name descname"><span class="pre">parse_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.address.Address.parse_url" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>site</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>full_address</strong> (<em>_type_</em>) – _description_</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -845,7 +865,7 @@ programmatically. This is likely due to session/cookie issues, which have yet to
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-27 20:09:58.
+      <span class="lastupdated">Last updated on 2022-02-27 22:31:46.
       </span></p>
   </div>
 

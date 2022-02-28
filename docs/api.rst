@@ -4,7 +4,7 @@ API Documentation
 Address
 =======
 
-.. autoclass:: ispchecker.main.Address
+.. autoclass:: ispchecker.address.Address
    :members:
    :undoc-members:
    :show-inheritance:
