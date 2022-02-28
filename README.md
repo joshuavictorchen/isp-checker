@@ -34,6 +34,6 @@ For example:
 
 Sample output:
 
-![sample output](_images/example1.png)
+![sample output](docs/_images/example1.png)
 
 Refer to the [documentation](https://joshuavictorchen.github.io/isp-checker/) for further instructions.
