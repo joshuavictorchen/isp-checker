@@ -17,6 +17,22 @@ class Address:
         self.address = {}
         self.isps = {}
 
+    def check_isps(self):
+
+        if self.address == {}:
+            print("\n Address is empty - please parse in an address first.")
+            return None
+
+        isps = {
+            "Spectrum": Spectrum(self.address),
+            "CenturyLink": CenturyLink(self.address),
+            "Verizon LTE": Verizon(self.address),
+        }
+
+        self.isps = isps
+
+        return isps
+
     def parse_address(self, full_address):
 
         # check if address is actually a zillow or trulia URL
@@ -43,12 +59,27 @@ class Address:
         return self.address
 
     def parse_url(self, site, full_address):
+        """_summary_
+
+        Args:
+            site (_type_): _description_
+            full_address (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
 
         # this is a temporary stop-gap measure for parsing addresses from URLs
 
-        # set up parsing variables
+        # get list of address components (strings) from URL
+        #   1. remove query params (everything after '?')
+        #   2. split by '/' and obtain URL section containing the address (url_index)
+        #   3. make everything UPPER CASE for downstream string comparison consistency
+        #   4. split URL tokens by '-' for parsing
+
+        # first, set up parsing variables
         # supported urls: zillow, trulia (hard-coded for now)
-        # MORE DOCUMENTATION TBD
+        # more thorough documentation TBD
         if site == "zillow":
             url_index = 4
             state_index = -2
@@ -60,18 +91,14 @@ class Address:
         else:
             return full_address
 
-        # get list of address components (strings) from URL
-        #   1. remove query params (everything after '?')
-        #   2. split by '/' and obtain URL section containing the address
-        #   3. make everything UPPER CASE for downstream string comparison and consistency
-        #   4. split URL tokens by '-' for parsing
+        # now, break down address
         address_breakdown = (
             full_address.split("?")[0].split("/")[url_index].upper().split("-")
         )
 
         # iterate through the relevant address components until a street abbreviation is found
         # if no abbreviations are found, then terminate the program
-        # iteration stops at state_index; MORE DOCUMENTATION TBD
+        # iteration stops at state_index, so that state abbreviations are not mixed up with street abbreviations
         valid_url = False
         for index, element in enumerate(address_breakdown[:state_index]):
             if element in STREET_ABBREVIATIONS:
@@ -94,22 +121,6 @@ class Address:
         full_address = " ".join(address_breakdown[0:final_trim])
 
         return full_address
-
-    def check_isps(self):
-
-        if self.address == {}:
-            print("\n Address is empty - please parse in an address first.")
-            return None
-
-        isps = {
-            "Spectrum": Spectrum(self.address),
-            "CenturyLink": CenturyLink(self.address),
-            "Verizon LTE": Verizon(self.address),
-        }
-
-        self.isps = isps
-
-        return isps
 
 
 # hard-coded list of street abbreviations
