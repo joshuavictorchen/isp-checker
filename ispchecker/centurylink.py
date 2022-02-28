@@ -1,22 +1,9 @@
-import requests
 from ispchecker import tools as t
 from ispchecker.isp import ISP
 
 
 class CenturyLink(ISP):
-    def __init__(self, address_dict: dict):
-
-        super().__init__(address_dict)
-
-        t.print_isp_loader("CenturyLink")
-        self.execute_centurylink_stack()
-
-        print(self.available)
-
-        if self.summary != {}:
-            t.print_recursive_dict(self.summary)
-
-    def execute_centurylink_stack(self):
+    def main_routine(self):
         """_summary_"""
 
         # get security token

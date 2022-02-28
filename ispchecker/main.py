@@ -1,12 +1,9 @@
 import sys
-import warnings
-from cryptography.utils import CryptographyDeprecationWarning
 from ispchecker import tools as t
 from ispchecker.address import Address
-
-
-# filter irrelevant deprecation warnings
-warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
+from ispchecker.spectrum import Spectrum
+from ispchecker.centurylink import CenturyLink
+from ispchecker.verizon import Verizon
 
 
 def main():
@@ -23,8 +20,8 @@ def main():
     a.parse_address(full_address)
     t.print_recursive_dict(a.address)
 
-    # check for isps
-    a.check_isps()
+    # check for isp availability
+    a.check_isps([Spectrum(), CenturyLink(), Verizon()])
     t.print_divider()
 
 

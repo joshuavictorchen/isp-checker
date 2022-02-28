@@ -97,19 +97,15 @@ with the intent of scaling up after basic features have been fleshed out.</p>
 <li><p>The user executes the program and provides a formatted, case-insensitive address via the command line
 - or a full URL to a Zillow or Trulia listing.</p></li>
 <li><p><a class="reference internal" href="api.html#ispchecker.address.Address.parse_address" title="ispchecker.address.Address.parse_address"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.parse_address</span></code></a> parses the provided
-address into a dictionary of sub-components (street, city, state, zip).</p>
-<ol class="loweralpha simple">
-<li><p>If a URL is provided, then the listing’s address is first parsed out of the URL.</p></li>
-</ol>
-</li>
-<li><p><a class="reference internal" href="api.html#ispchecker.address.Address.check_isps" title="ispchecker.address.Address.check_isps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.check_isps</span></code></a> instantiates a series of
-<a class="reference internal" href="api.html#ispchecker.isp.ISP" title="ispchecker.isp.ISP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISP</span></code></a>-based objects, which perform unique ISP-specific actions
-to retrieve metadata (serviceability, supported internet speed, etc.) based on their own execution stacks.</p></li>
+address or listing URL into a dictionary of address sub-components (street, city, state, zip).</p></li>
+<li><p><a class="reference internal" href="api.html#ispchecker.address.Address.check_isps" title="ispchecker.address.Address.check_isps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.check_isps</span></code></a> executes unique ISP-specific routines on
+a series of instantiated <a class="reference internal" href="api.html#ispchecker.isp.ISP" title="ispchecker.isp.ISP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISP</span></code></a>-based objects to retrieve metadata on
+serviceability, supported internet speed, etc.</p></li>
 <li><p>Results are printed to the console at runtime.</p></li>
 </ol>
 </div></blockquote>
 <p>More ISPs can be checked by simply creating new <a class="reference internal" href="api.html#ispchecker.isp.ISP" title="ispchecker.isp.ISP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISP</span></code></a>-based classes and adding them to the
-<a class="reference internal" href="api.html#ispchecker.address.Address.check_isps" title="ispchecker.address.Address.check_isps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.check_isps</span></code></a> function.</p>
+<a class="reference internal" href="api.html#ispchecker.address.Address.check_isps" title="ispchecker.address.Address.check_isps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Address.check_isps</span></code></a> call.</p>
 </section>
 <section id="methodology">
 <h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline"></a></h2>
@@ -190,7 +186,7 @@ of service, addresses not serviced by the ISP, addresses not recognized by the w
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-27 22:31:46.
+      <span class="lastupdated">Last updated on 2022-02-27 23:47:47.
       </span></p>
   </div>
 

@@ -99,7 +99,7 @@
 </div></blockquote>
 <dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.address.Address.check_isps">
-<span class="sig-name descname"><span class="pre">check_isps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.address.Address.check_isps" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">check_isps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isp_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.address.Address.check_isps" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -134,9 +134,18 @@
 <h2>ISP<a class="headerlink" href="#isp" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.isp.ISP">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.isp.</span></span><span class="sig-name descname"><span class="pre">ISP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.isp.ISP" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.isp.</span></span><span class="sig-name descname"><span class="pre">ISP</span></span><a class="headerlink" href="#ispchecker.isp.ISP" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Base class for ISPs. More documentation TBD.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.isp.ISP.main_routine">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">main_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.isp.ISP.main_routine" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.isp.ISP.check_availability">
+<span class="sig-name descname"><span class="pre">check_availability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.isp.ISP.check_availability" title="Permalink to this definition"></a></dt>
+<dd><p>_summary_</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>address_dict</strong> (<em>dict</em>) – <p>Dictionary of address attributes in the following form:</p>
@@ -152,25 +161,7 @@
 </p>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.isp.ISP.get_address">
-<span class="sig-name descname"><span class="pre">get_address</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.isp.ISP.get_address" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.isp.ISP.get_availability">
-<span class="sig-name descname"><span class="pre">get_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.isp.ISP.get_availability" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.isp.ISP.get_summary">
-<span class="sig-name descname"><span class="pre">get_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.isp.ISP.get_summary" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.isp.ISP.get_metadata">
-<span class="sig-name descname"><span class="pre">get_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.isp.ISP.get_metadata" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -178,8 +169,13 @@
 <h3>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.spectrum.Spectrum">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.spectrum.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.spectrum.Spectrum" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.spectrum.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><a class="headerlink" href="#ispchecker.spectrum.Spectrum" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ispchecker.isp.ISP" title="ispchecker.isp.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.isp.ISP</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.spectrum.Spectrum.main_routine">
+<span class="sig-name descname"><span class="pre">main_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.spectrum.Spectrum.main_routine" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.spectrum.Spectrum.retrieve_address_and_session_metadata">
 <span class="sig-name descname"><span class="pre">retrieve_address_and_session_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.spectrum.Spectrum.retrieve_address_and_session_metadata" title="Permalink to this definition"></a></dt>
@@ -317,11 +313,11 @@ programmatically. This is likely due to session/cookie issues, which have yet to
 <h3>CenturyLink<a class="headerlink" href="#centurylink" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.centurylink.CenturyLink">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.centurylink.</span></span><span class="sig-name descname"><span class="pre">CenturyLink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.centurylink.CenturyLink" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.centurylink.</span></span><span class="sig-name descname"><span class="pre">CenturyLink</span></span><a class="headerlink" href="#ispchecker.centurylink.CenturyLink" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ispchecker.isp.ISP" title="ispchecker.isp.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.isp.ISP</span></code></a></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="ispchecker.centurylink.CenturyLink.execute_centurylink_stack">
-<span class="sig-name descname"><span class="pre">execute_centurylink_stack</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.centurylink.CenturyLink.execute_centurylink_stack" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ispchecker.centurylink.CenturyLink.main_routine">
+<span class="sig-name descname"><span class="pre">main_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.centurylink.CenturyLink.main_routine" title="Permalink to this definition"></a></dt>
 <dd><p>_summary_</p>
 </dd></dl>
 
@@ -593,8 +589,13 @@ programmatically. This is likely due to session/cookie issues, which have yet to
 <h3>Verizon<a class="headerlink" href="#verizon" title="Permalink to this headline"></a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ispchecker.verizon.Verizon">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.verizon.</span></span><span class="sig-name descname"><span class="pre">Verizon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.verizon.Verizon" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ispchecker.verizon.</span></span><span class="sig-name descname"><span class="pre">Verizon</span></span><a class="headerlink" href="#ispchecker.verizon.Verizon" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ispchecker.isp.ISP" title="ispchecker.isp.ISP"><code class="xref py py-class docutils literal notranslate"><span class="pre">ispchecker.isp.ISP</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ispchecker.verizon.Verizon.main_routine">
+<span class="sig-name descname"><span class="pre">main_routine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.verizon.Verizon.main_routine" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ispchecker.verizon.Verizon.retrieve_plan_availability">
 <span class="sig-name descname"><span class="pre">retrieve_plan_availability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ispchecker.verizon.Verizon.retrieve_plan_availability" title="Permalink to this definition"></a></dt>
@@ -865,7 +866,7 @@ programmatically. This is likely due to session/cookie issues, which have yet to
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022, Joshua Chen.
-      <span class="lastupdated">Last updated on 2022-02-27 22:31:46.
+      <span class="lastupdated">Last updated on 2022-02-27 23:47:47.
       </span></p>
   </div>
 
