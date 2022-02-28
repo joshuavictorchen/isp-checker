@@ -26,7 +26,6 @@ class ISP(ABC):
         self.session = requests.Session()
         self.address = address_dict
         self.available = None
-        self.top_speed = None
         self.summary = {}
         self.metadata = {}
 
@@ -35,9 +34,6 @@ class ISP(ABC):
 
     def get_availability(self):
         return self.available
-
-    def get_top_speed(self):
-        return self.top_speed
 
     def get_summary(self):
         return self.summary

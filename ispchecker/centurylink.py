@@ -11,12 +11,13 @@ class CenturyLink(ISP):
         t.print_isp_loader("CenturyLink")
         self.execute_centurylink_stack()
 
-        if not self.available or self.available == "Undetermined":
-            print(self.available)
-        else:
-            print(f"{self.available} ({self.top_speed} Mbps)")
+        print(self.available)
+
+        if self.summary != {}:
+            t.print_recursive_dict(self.summary)
 
     def execute_centurylink_stack(self):
+        """_summary_"""
 
         # get security token
         access_token = self.retrieve_and_parse_access_token()
@@ -29,7 +30,7 @@ class CenturyLink(ISP):
 
         # exit routine if no matches found
         if not parsed_address_metadata:
-            self.available = False
+            self.available = "Address not found"
             return
 
         # get request wireCenter attribute using the parsed_address_metadata
@@ -44,12 +45,12 @@ class CenturyLink(ISP):
         wireCenter = self.parse_wireCenter(wireCenter_response)
 
         # exit routine if no match found
-        # NOTE: NOT checking for null wireCenter
+        # NOTE: NOT checking for null wireCenter (details TBD)
         if wireCenter == "No match":
-            self.available = False
-            self.top_speed = 0
+            self.available = "No service"
             return
 
+        # request offerings using access token, address metadata, and wireCenter
         offering_response = self.retrieve_offerings(
             access_token,
             parsed_address_metadata.get("addressId"),
@@ -57,6 +58,7 @@ class CenturyLink(ISP):
             wireCenter,
         )
 
+        # parse offering response
         self.metadata.update(self.parse_offerings(offering_response))
 
     def retrieve_and_parse_access_token(self):
@@ -177,6 +179,9 @@ class CenturyLink(ISP):
             "addressId": addressId,
         }
 
+        # update summary dict
+        self.summary.update(metadata)
+
         return metadata
 
     def retrieve_wireCenter(self, access_token, provider, fullAddress, addressId):
@@ -263,6 +268,9 @@ class CenturyLink(ISP):
 
         # get the wireCenter name
         wireCenter = response_dict.get("addrValInfo").get("wireCenter")
+
+        # update summary dict
+        self.summary.update({"wireCenter": wireCenter})
 
         return wireCenter
 
@@ -387,9 +395,15 @@ class CenturyLink(ISP):
 
         # get the top speed in mbps
         # CenturyLink lists the fastest offer first, per their website
-        self.top_speed = response_dict.get("offersList")[0].get("downloadSpeedMbps")
+        self.summary.update(
+            {
+                "downloadSpeedMbps": response_dict.get("offersList")[0].get(
+                    "downloadSpeedMbps"
+                )
+            }
+        )
 
         # this also means that it's available by definition
-        self.available = True
+        self.available = "Available"
 
         return response_dict

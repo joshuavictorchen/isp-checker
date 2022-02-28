@@ -17,7 +17,9 @@ class Spectrum(ISP):
         self.metadata.update(self.parse_address_and_session_metadata(r))
 
         print(self.available)
-        t.print_recursive_dict(self.summary)
+
+        if self.summary != {}:
+            t.print_recursive_dict(self.summary)
 
     def retrieve_address_and_session_metadata(self):
         """_summary_
