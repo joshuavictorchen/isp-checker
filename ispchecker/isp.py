@@ -1,12 +1,6 @@
 import requests
-import warnings
 from abc import ABC, abstractmethod
-from cryptography.utils import CryptographyDeprecationWarning
 from ispchecker import tools as t
-
-# filter irrelevant deprecation warnings, which pop up when using the requests module
-# https://github.com/pyca/cryptography/issues/6456#issue-1033689568
-warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
 
 
 class ISP(ABC):
