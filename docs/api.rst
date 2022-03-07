@@ -1,6 +1,11 @@
 API Documentation
 -----------------
 
+.. note::
+
+   Docstrings are still under construction. However, JSON response structures for all 
+   relevant ISP API endpoints have been recorded under their respective functions.
+
 Address
 =======
 

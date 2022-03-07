@@ -1,7 +1,7 @@
 User Manual
 -----------
 
-Detailed user instructions TBD.
+*Detailed user instructions TBD.*
 
 Installation
 ============
