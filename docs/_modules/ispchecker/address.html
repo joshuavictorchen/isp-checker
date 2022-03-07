@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ispchecker.address &mdash; docs</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/logo-original.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #283618" >
+            <a href="../../index.html" class="icon icon-home"> isp-checker
+            <img src="../../_static/logo-64.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                beta
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #283618" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">isp-checker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>ispchecker.address</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ispchecker.address</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+
+<div class="viewcode-block" id="Address"><a class="viewcode-back" href="../../api.html#ispchecker.address.Address">[docs]</a><span class="k">class</span> <span class="nc">Address</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Placeholder text.</span>
+
+<span class="sd">    **Relevant instance attributes:** \n</span>
+<span class="sd">        * **address** (*dict*): Dictionary of addresses.</span>
+<span class="sd">        * **isps** (*dict*): Dictionary of instantiated ISPs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isps</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="Address.check_isps"><a class="viewcode-back" href="../../api.html#ispchecker.address.Address.check_isps">[docs]</a>    <span class="k">def</span> <span class="nf">check_isps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isp_list</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">==</span> <span class="p">{}:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Address is empty - please parse in an address first.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">isp_list</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">check_availability</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Address.parse_address"><a class="viewcode-back" href="../../api.html#ispchecker.address.Address.parse_address">[docs]</a>    <span class="k">def</span> <span class="nf">parse_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">full_address</span><span class="p">):</span>
+
+        <span class="c1"># check if address is actually a zillow or trulia URL</span>
+        <span class="c1"># if so, parse the address out of the URL before proceeding</span>
+        <span class="k">if</span> <span class="s2">&quot;www.zillow.com&quot;</span> <span class="ow">in</span> <span class="n">full_address</span><span class="p">:</span>
+            <span class="n">full_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_url</span><span class="p">(</span><span class="s2">&quot;zillow&quot;</span><span class="p">,</span> <span class="n">full_address</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;www.trulia.com&quot;</span> <span class="ow">in</span> <span class="n">full_address</span><span class="p">:</span>
+            <span class="n">full_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_url</span><span class="p">(</span><span class="s2">&quot;trulia&quot;</span><span class="p">,</span> <span class="n">full_address</span><span class="p">)</span>
+
+        <span class="c1"># split the comma-delimited string and store trimmed elements in list</span>
+        <span class="n">address_components</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">full_address</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+
+        <span class="c1"># store each address component, along with the full original address, in a dict</span>
+        <span class="c1"># the last two elements in the list are assumed to be state and zip (i.e. NC 12345)</span>
+        <span class="n">address_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;full_address&quot;</span><span class="p">:</span> <span class="n">full_address</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+            <span class="s2">&quot;street&quot;</span><span class="p">:</span> <span class="n">address_components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+            <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="n">address_components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+            <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">address_components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+            <span class="s2">&quot;zip&quot;</span><span class="p">:</span> <span class="n">address_components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">address_dict</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span></div>
+
+<div class="viewcode-block" id="Address.parse_url"><a class="viewcode-back" href="../../api.html#ispchecker.address.Address.parse_url">[docs]</a>    <span class="k">def</span> <span class="nf">parse_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">,</span> <span class="n">full_address</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            site (_type_): _description_</span>
+<span class="sd">            full_address (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># this is a temporary, janky, stop-gap measure for parsing addresses from URLs</span>
+
+        <span class="c1"># get list of address components (strings) from URL</span>
+        <span class="c1">#   1. remove query params (everything after &#39;?&#39;)</span>
+        <span class="c1">#   2. split by &#39;/&#39; and obtain URL section containing the address (url_index)</span>
+        <span class="c1">#   3. make everything UPPER CASE for downstream string comparison consistency</span>
+        <span class="c1">#   4. split URL tokens by &#39;-&#39; for parsing</span>
+
+        <span class="c1"># first, set up parsing variables</span>
+        <span class="c1"># supported urls: zillow, trulia (hard-coded for now)</span>
+        <span class="c1"># more thorough documentation TBD</span>
+        <span class="k">if</span> <span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;zillow&quot;</span><span class="p">:</span>
+            <span class="n">url_index</span> <span class="o">=</span> <span class="mi">4</span>
+            <span class="n">state_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+            <span class="n">final_trim</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="c1"># zillow links come in two forms, depending on if the listing was searched for directly,</span>
+            <span class="c1"># or if the listing was shared via the &#39;get shareable link&#39; feature</span>
+            <span class="c1"># perform some string cleaning to force consistency for zillow URLs</span>
+            <span class="n">full_address</span> <span class="o">=</span> <span class="n">full_address</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_rb&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;trulia&quot;</span><span class="p">:</span>
+            <span class="n">url_index</span> <span class="o">=</span> <span class="mi">6</span>
+            <span class="n">state_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span>
+            <span class="n">final_trim</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">full_address</span>
+
+        <span class="c1"># now, break down address</span>
+        <span class="n">address_breakdown</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">full_address</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;?&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="n">url_index</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># iterate through the relevant address components until a street abbreviation is found</span>
+        <span class="c1"># if no abbreviations are found, then terminate the program</span>
+        <span class="c1"># iteration stops at state_index, so that state abbreviations are not mixed up with street abbreviations</span>
+        <span class="n">valid_url</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">address_breakdown</span><span class="p">[:</span><span class="n">state_index</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">STREET_ABBREVIATIONS</span><span class="p">:</span>
+                <span class="n">valid_url</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">valid_url</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Error: unable to parse URL. Please verify the URL or enter the address directly.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># add a comma after the street abbreviation (important for downstream parsing)</span>
+        <span class="n">address_breakdown</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+=</span> <span class="s2">&quot;,&quot;</span>
+
+        <span class="c1"># add a comma after the last token of the city name (i.e., one token before the state index)</span>
+        <span class="c1"># (important for downstream parsing)</span>
+        <span class="n">address_breakdown</span><span class="p">[</span><span class="n">state_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="s2">&quot;,&quot;</span>
+
+        <span class="c1"># join the components back together, leaving out extra tokens as applicable</span>
+        <span class="n">full_address</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">address_breakdown</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">final_trim</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">full_address</span></div></div>
+
+
+<span class="c1"># hard-coded list of street abbreviations</span>
+<span class="c1"># (placed at the bottom of this file for legibility)</span>
+<span class="c1"># this is a temporary stop-gap measure for parsing addresses from URLs</span>
+<span class="c1"># source: https://pe.usps.com/text/pub28/28apc_002.htm</span>
+<span class="n">STREET_ABBREVIATIONS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;ALY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ANX&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ARC&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AVE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BYU&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BCH&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BND&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BLF&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BLFS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BTM&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BLVD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BRG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BRK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BRKS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BGS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BYP&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CP&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CYN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CPE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CSWY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CTR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CTRS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CIR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CIRS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CLF&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CLFS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CLB&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CMN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CMNS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;COR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CORS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CRSE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CV&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CVS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CRK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CRES&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CRST&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;XING&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;XRD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;XRDS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CURV&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DM&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DV&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DRS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EST&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ESTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EXPY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EXT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EXTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FALL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FLS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FLD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FLDS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FLT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FLTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRDS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRST&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRGS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FRKS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FWY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GDN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GDNS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GTWY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GLN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GLNS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GRN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GRNS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GRV&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GRVS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HBR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HBRS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HVN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HWY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HLS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HOLW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;INLT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ISS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ISLE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JCT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JCTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KYS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KNL &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KNLS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LKS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LAND&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LNDG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LGT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LGTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LF&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LCK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LCKS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LDG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LOOP&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MALL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MNR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MNRS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MDW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MDWS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MEWS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ML&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MLS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MSN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MTWY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MTN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MTNS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;NCK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ORCH&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OVAL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OPAS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PARK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PKWY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PASS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PSGE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PATH&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PIKE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PNE &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PNES&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PLN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PLNS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PLZ&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PRT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PRTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RADL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RAMP&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RNCH&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RPD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RPDS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RST&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RDG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RDGS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RIV&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RDS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RTE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ROW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RUE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RUN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SHL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SHLS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SHR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SHRS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SKWY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SPG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SPGS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SPUR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SQ&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SQS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;STA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;STRA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;STRM&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ST&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;STS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SMT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TER&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TRWY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TRCE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TRAK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TRFY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TRL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TRLR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TUNL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TPKE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UPAS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UNS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VLY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VLYS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VIA&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VWS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VLG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VLGS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VIS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WALK&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WALL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WAY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WAYS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WL &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;WLS&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Joshua Chen.
+      <span class="lastupdated">Last updated on 2022-03-07 00:30:34.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

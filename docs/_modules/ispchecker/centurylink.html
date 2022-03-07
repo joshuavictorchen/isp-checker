@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ispchecker.centurylink &mdash; docs</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/logo-original.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #283618" >
+            <a href="../../index.html" class="icon icon-home"> isp-checker
+            <img src="../../_static/logo-64.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                beta
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #283618" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">isp-checker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>ispchecker.centurylink</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ispchecker.centurylink</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ispchecker</span> <span class="kn">import</span> <span class="n">tools</span> <span class="k">as</span> <span class="n">t</span>
+<span class="kn">from</span> <span class="nn">ispchecker.isp</span> <span class="kn">import</span> <span class="n">ISP</span>
+
+
+<div class="viewcode-block" id="CenturyLink"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink">[docs]</a><span class="k">class</span> <span class="nc">CenturyLink</span><span class="p">(</span><span class="n">ISP</span><span class="p">):</span>
+<div class="viewcode-block" id="CenturyLink.main_routine"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink.main_routine">[docs]</a>    <span class="k">def</span> <span class="nf">main_routine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_&quot;&quot;&quot;</span>
+
+        <span class="c1"># get security token</span>
+        <span class="n">access_token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_and_parse_access_token</span><span class="p">()</span>
+
+        <span class="c1"># get initial address response</span>
+        <span class="n">address_metadata_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_address_metadata</span><span class="p">(</span><span class="n">access_token</span><span class="p">)</span>
+
+        <span class="c1"># check for returned address matches</span>
+        <span class="n">parsed_address_metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_address_metadata</span><span class="p">(</span><span class="n">address_metadata_response</span><span class="p">)</span>
+
+        <span class="c1"># exit routine if no matches found</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">parsed_address_metadata</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;Address not found&quot;</span>
+            <span class="k">return</span>
+
+        <span class="c1"># get request wireCenter attribute using the parsed_address_metadata</span>
+        <span class="n">wireCenter_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_wireCenter</span><span class="p">(</span>
+            <span class="n">access_token</span><span class="p">,</span>
+            <span class="n">parsed_address_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;provider&quot;</span><span class="p">),</span>
+            <span class="n">parsed_address_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fullAddress&quot;</span><span class="p">),</span>
+            <span class="n">parsed_address_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;addressId&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># parse wireCenter attribute from response</span>
+        <span class="n">wireCenter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_wireCenter</span><span class="p">(</span><span class="n">wireCenter_response</span><span class="p">)</span>
+
+        <span class="c1"># exit routine if no match found</span>
+        <span class="c1"># NOTE: NOT checking for null wireCenter (details TBD)</span>
+        <span class="k">if</span> <span class="n">wireCenter</span> <span class="o">==</span> <span class="s2">&quot;No match&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;No service&quot;</span>
+            <span class="k">return</span>
+
+        <span class="c1"># request offerings using access token, address metadata, and wireCenter</span>
+        <span class="n">offering_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_offerings</span><span class="p">(</span>
+            <span class="n">access_token</span><span class="p">,</span>
+            <span class="n">parsed_address_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;addressId&quot;</span><span class="p">),</span>
+            <span class="n">parsed_address_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fullAddress&quot;</span><span class="p">),</span>
+            <span class="n">wireCenter</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># parse offering response</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_offerings</span><span class="p">(</span><span class="n">offering_response</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="CenturyLink.retrieve_and_parse_access_token"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink.retrieve_and_parse_access_token">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_and_parse_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+
+<span class="sd">        .. code-block::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &#39;expires_in&#39;: str,</span>
+<span class="sd">                &#39;access_token&#39;: str,</span>
+<span class="sd">                &#39;issued_at&#39;: str</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://shop.centurylink.com/uas/oauth&quot;</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;keep-alive&quot;</span><span class="p">}</span>
+        <span class="n">response_dict</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">convert_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">))</span>
+
+        <span class="c1"># subsequent API requests use access_token prepended by &quot;Bearer &quot;</span>
+        <span class="n">access_token</span> <span class="o">=</span> <span class="s2">&quot;Bearer &quot;</span> <span class="o">+</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;access_token&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">access_token</span></div>
+
+<div class="viewcode-block" id="CenturyLink.retrieve_address_metadata"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink.retrieve_address_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_address_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            access_token (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+
+<span class="sd">        .. code-block::</span>
+
+<span class="sd">            # (response mapping may be incomplete)</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &#39;status&#39;: int,</span>
+<span class="sd">                &#39;message&#39;: str,</span>
+<span class="sd">                &#39;provider&#39;: str,</span>
+<span class="sd">                &#39;predictedAddressList&#39;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &#39;fullAddress&#39;: str,</span>
+<span class="sd">                        &#39;addressId&#39;: str,</span>
+<span class="sd">                        &#39;mdu&#39;: bool</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.lumen.com/Application/v4/DCEP-Consumer/addressPredict&quot;</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="n">access_token</span><span class="p">,</span> <span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;keep-alive&quot;</span><span class="p">}</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;addr&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;full_address&quot;</span><span class="p">)),)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">convert_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CenturyLink.parse_address_metadata"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink.parse_address_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_address_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            response (dict): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># if no predicted addresses found, then return None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;predictedAddressList&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># check if queried address is in predicted address list</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;predictedAddressList&quot;</span><span class="p">):</span>
+
+            <span class="c1"># fullAddress is returned in the form: 123 NAME RD,CITY,STATE 12345,USA</span>
+            <span class="c1"># reformat and remove the &#39;RD&#39; and &#39;USA&#39; for comparison to self.address element</span>
+
+            <span class="c1"># get list of address components, minus the last token</span>
+            <span class="n">fullAddress</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fullAddress&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># remove last sub-token of first token (i.e., the &#39;RD&#39;)</span>
+            <span class="n">fullAddress</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">fullAddress</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># join the components back together</span>
+            <span class="n">fullAddress</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fullAddress</span><span class="p">)</span>
+
+            <span class="c1"># perform comparison</span>
+            <span class="k">if</span> <span class="n">fullAddress</span> <span class="o">==</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;street&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="o">+</span> <span class="s2">&quot;, &quot;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot;, &quot;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;zip&quot;</span><span class="p">)</span>
+            <span class="p">):</span>
+
+                <span class="n">match</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">fullAddress</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fullAddress&quot;</span><span class="p">)</span>
+                <span class="n">addressId</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;addressId&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+        <span class="c1"># if no matches found, then return None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># get provider</span>
+        <span class="n">provider</span> <span class="o">=</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;provider&quot;</span><span class="p">)</span>
+
+        <span class="c1"># store parsed values in dict</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="n">provider</span><span class="p">,</span>
+            <span class="s2">&quot;fullAddress&quot;</span><span class="p">:</span> <span class="n">fullAddress</span><span class="p">,</span>
+            <span class="s2">&quot;addressId&quot;</span><span class="p">:</span> <span class="n">addressId</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># update summary dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">metadata</span></div>
+
+<div class="viewcode-block" id="CenturyLink.retrieve_wireCenter"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink.retrieve_wireCenter">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_wireCenter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">fullAddress</span><span class="p">,</span> <span class="n">addressId</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            access_token (_type_): _description_</span>
+<span class="sd">            provider (_type_): _description_</span>
+<span class="sd">            fullAddress (_type_): _description_</span>
+<span class="sd">            addressId (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+
+<span class="sd">        .. code-block::</span>
+
+<span class="sd">            # (response mapping may be incomplete)</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &#39;status&#39;: int,</span>
+<span class="sd">                &#39;message&#39;: str,</span>
+<span class="sd">                &#39;addrValInfo&#39;: {</span>
+<span class="sd">                    &#39;result&#39;: str,</span>
+<span class="sd">                    &#39;billingSource&#39;: str,</span>
+<span class="sd">                    &#39;fullAddress&#39;: str,</span>
+<span class="sd">                    &#39;addressId&#39;: str,</span>
+<span class="sd">                    &#39;mduInfo&#39;: TBD,</span>
+<span class="sd">                    &#39;wireCenter&#39;: str,</span>
+<span class="sd">                    &#39;nearMatchAddress&#39;: TBD,</span>
+<span class="sd">                    &#39;nearMatchList&#39;: TBD,</span>
+<span class="sd">                    &#39;exactMatchAddress&#39;: TBD</span>
+<span class="sd">                },</span>
+<span class="sd">                &#39;loopQualInfo&#39;: {</span>
+<span class="sd">                    &#39;message&#39;: str,</span>
+<span class="sd">                    &#39;messageDetail&#39;: TBD</span>
+<span class="sd">                },</span>
+<span class="sd">                &#39;leadIndicator&#39;: str,</span>
+<span class="sd">                &#39;leadIndicatorStatus&#39;: TBD,</span>
+<span class="sd">                &#39;addressId&#39;: str,</span>
+<span class="sd">                &#39;unitNumber&#39;: TBD,</span>
+<span class="sd">                &#39;geoSecUnitId&#39;: TBD,</span>
+<span class="sd">                &#39;googleInfo&#39;: TBD,</span>
+<span class="sd">                &#39;biwfInfo&#39;: {</span>
+<span class="sd">                    &#39;fiberQualified&#39;: bool,</span>
+<span class="sd">                    &#39;redirectUrl&#39;: TBD</span>
+<span class="sd">                },</span>
+<span class="sd">                &#39;below940&#39;: bool,</span>
+<span class="sd">                &#39;existingService&#39;: bool,</span>
+<span class="sd">                &#39;expectedCompDate&#39;: TBD</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="n">access_token</span><span class="p">,</span>
+            <span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;keep-alive&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;addressId&quot;</span><span class="p">:</span> <span class="n">addressId</span><span class="p">,</span>
+            <span class="s2">&quot;fullAddress&quot;</span><span class="p">:</span> <span class="n">fullAddress</span><span class="p">,</span>
+            <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="n">provider</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="s2">&quot;https://api.lumen.com/Application/v4/DCEP-Consumer/identifyAddress&quot;</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+            <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">convert_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CenturyLink.parse_wireCenter"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink.parse_wireCenter">[docs]</a>    <span class="k">def</span> <span class="nf">parse_wireCenter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            response (dict): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># ensure the system has found an exact match for the address</span>
+        <span class="c1"># TODO: move this message string to a settings/config file</span>
+        <span class="k">if</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;GREEN - exact match&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;No match&quot;</span>
+
+        <span class="c1"># get the wireCenter name</span>
+        <span class="n">wireCenter</span> <span class="o">=</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;addrValInfo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;wireCenter&quot;</span><span class="p">)</span>
+
+        <span class="c1"># update summary dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;wireCenter&quot;</span><span class="p">:</span> <span class="n">wireCenter</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">wireCenter</span></div>
+
+<div class="viewcode-block" id="CenturyLink.retrieve_offerings"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink.retrieve_offerings">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_offerings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">,</span> <span class="n">addressId</span><span class="p">,</span> <span class="n">fullAddress</span><span class="p">,</span> <span class="n">wireCenter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            access_token (_type_): _description_</span>
+<span class="sd">            addressId (_type_): _description_</span>
+<span class="sd">            fullAddress (_type_): _description_</span>
+<span class="sd">            wireCenter (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+
+<span class="sd">        .. code-block::</span>
+
+<span class="sd">            # (response mapping may be incomplete)</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &#39;fixedWirelessQualified&#39;: bool,</span>
+<span class="sd">                &#39;groupId&#39;: TBD,</span>
+<span class="sd">                &#39;dynamicRuleVersion&#39;: TBD,</span>
+<span class="sd">                &#39;offersList&#39;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &#39;downloadSpeed&#39;: str,</span>
+<span class="sd">                        &#39;uploadSpeed&#39;: str,</span>
+<span class="sd">                        &#39;downloadSpeedMbps&#39;: str,</span>
+<span class="sd">                        &#39;uploadSpeedMbps&#39;: str,</span>
+<span class="sd">                        &#39;downloadDisplaySpeed&#39;: str,</span>
+<span class="sd">                        &#39;uploadDisplaySpeed&#39;: str,</span>
+<span class="sd">                        &#39;internetTypeSortOrder&#39;: int,</span>
+<span class="sd">                        &#39;internetType&#39;: str,</span>
+<span class="sd">                        &#39;productType&#39;: str,</span>
+<span class="sd">                        &#39;priceType&#39;: str,</span>
+<span class="sd">                        &#39;skuName&#39;: str,</span>
+<span class="sd">                        &#39;price&#39;: float,</span>
+<span class="sd">                        &#39;networkInfrastructure&#39;: str,</span>
+<span class="sd">                        &#39;offerName&#39;: str,</span>
+<span class="sd">                        &#39;mandatoryTechInstallFlag&#39;: bool,</span>
+<span class="sd">                        &#39;qualificationColorName&#39;: str,</span>
+<span class="sd">                        &#39;catalogSpecId&#39;: str,</span>
+<span class="sd">                        &#39;catalogId&#39;: str,</span>
+<span class="sd">                        &#39;offerType&#39;: str,</span>
+<span class="sd">                        &#39;productOfferingId&#39;: str,</span>
+<span class="sd">                        &#39;productIdentifierKey&#39;: str,</span>
+<span class="sd">                        &#39;discountedOtc&#39;: float,</span>
+<span class="sd">                        &#39;discountedRc&#39;: float,</span>
+<span class="sd">                        &#39;otc&#39;: float,</span>
+<span class="sd">                        &#39;rc&#39;: float,</span>
+<span class="sd">                        &#39;strikePrice&#39;: float,</span>
+<span class="sd">                        &#39;discount&#39;: list(TBD),</span>
+<span class="sd">                        &#39;derivedDownSpeed&#39;: str,</span>
+<span class="sd">                        &#39;derivedUpSpeed&#39;: str,</span>
+<span class="sd">                        &#39;offerDescription&#39;: str,</span>
+<span class="sd">                        &#39;priceKey&#39;: str,</span>
+<span class="sd">                        &#39;productDisplayName&#39;: str,</span>
+<span class="sd">                        &#39;description&#39;: str,</span>
+<span class="sd">                        &#39;bmOfferDetails&#39;: str,</span>
+<span class="sd">                        &#39;modem&#39;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                # (truncated - dict of SKUs)</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &#39;groupId&#39;: TBD,</span>
+<span class="sd">                        &#39;vas&#39;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                # (truncated - dict of SKUs)</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                ],</span>
+<span class="sd">                &#39;fixedWirelessOffersList&#39;: TBD,</span>
+<span class="sd">                &#39;secureWifiOffersList&#39;: TBD,</span>
+<span class="sd">                &#39;dialUp&#39;: bool,</span>
+<span class="sd">                &#39;noCatalogueProducts&#39;: bool,</span>
+<span class="sd">                &#39;errorMessage&#39;: TBD,</span>
+<span class="sd">                &#39;billingSource&#39;: TBD,</span>
+<span class="sd">                &#39;status&#39;: str,</span>
+<span class="sd">                &#39;defaultOffer&#39;: bool,</span>
+<span class="sd">                &#39;cityOmaha940Offer&#39;: bool,</span>
+<span class="sd">                &#39;orderNumber&#39;: TBD,</span>
+<span class="sd">                &#39;gfastFlag&#39;: bool,</span>
+<span class="sd">                &#39;giftCardFlag&#39;: bool,</span>
+<span class="sd">                &#39;sling&#39;: bool,</span>
+<span class="sd">                &#39;thirtyDollarFiberOffer&#39;: bool,</span>
+<span class="sd">                &#39;epix&#39;: bool,</span>
+<span class="sd">                &#39;gc200for940M&#39;: bool,</span>
+<span class="sd">                &#39;caf&#39;: bool,</span>
+<span class="sd">                &#39;defaultSpeedServiceFailure&#39;: TBD</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="n">access_token</span><span class="p">,</span>
+            <span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;keep-alive&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;addressId&quot;</span><span class="p">:</span> <span class="n">addressId</span><span class="p">,</span>
+            <span class="s2">&quot;fullAddress&quot;</span><span class="p">:</span> <span class="n">fullAddress</span><span class="p">,</span>
+            <span class="s2">&quot;wireCenter&quot;</span><span class="p">:</span> <span class="n">wireCenter</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="s2">&quot;https://api.centurylink.com/Application/v4/DCEP-Consumer/offer&quot;</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+            <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">convert_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CenturyLink.parse_offerings"><a class="viewcode-back" href="../../api.html#ispchecker.centurylink.CenturyLink.parse_offerings">[docs]</a>    <span class="k">def</span> <span class="nf">parse_offerings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            response (dict): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># get the top speed in mbps</span>
+        <span class="c1"># CenturyLink lists the fastest offer first, per their website</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;downloadSpeedMbps&quot;</span><span class="p">:</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;offersList&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                    <span class="s2">&quot;downloadSpeedMbps&quot;</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="c1"># this also means that it&#39;s available by definition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;Available&quot;</span>
+
+        <span class="k">return</span> <span class="n">response_dict</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Joshua Chen.
+      <span class="lastupdated">Last updated on 2022-03-07 00:30:34.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
