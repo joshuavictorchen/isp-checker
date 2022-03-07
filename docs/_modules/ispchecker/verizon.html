@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ispchecker.verizon &mdash; docs</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/logo-original.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #283618" >
+            <a href="../../index.html" class="icon icon-home"> isp-checker
+            <img src="../../_static/logo-64.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                beta
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #283618" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">isp-checker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>ispchecker.verizon</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ispchecker.verizon</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ispchecker</span> <span class="kn">import</span> <span class="n">tools</span> <span class="k">as</span> <span class="n">t</span>
+<span class="kn">from</span> <span class="nn">ispchecker.isp</span> <span class="kn">import</span> <span class="n">ISP</span>
+
+
+<div class="viewcode-block" id="Verizon"><a class="viewcode-back" href="../../api.html#ispchecker.verizon.Verizon">[docs]</a><span class="k">class</span> <span class="nc">Verizon</span><span class="p">(</span><span class="n">ISP</span><span class="p">):</span>
+<div class="viewcode-block" id="Verizon.main_routine"><a class="viewcode-back" href="../../api.html#ispchecker.verizon.Verizon.main_routine">[docs]</a>    <span class="k">def</span> <span class="nf">main_routine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># retrieve plan availability</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_plan_availability</span><span class="p">()</span>
+
+        <span class="c1"># get dict from response, parse availability, and update self.metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_plan_availability</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Verizon.retrieve_plan_availability"><a class="viewcode-back" href="../../api.html#ispchecker.verizon.Verizon.retrieve_plan_availability">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_plan_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+
+<span class="sd">        .. code-block::</span>
+
+<span class="sd">            # (response mapping is incomplete)</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &#39;output&#39;: {</span>
+<span class="sd">                    &#39;qualified&#39;: bool,</span>
+<span class="sd">                    &#39;reservation&#39;: TBD,</span>
+<span class="sd">                    &#39;emailAddress&#39;: TBD,</span>
+<span class="sd">                    &#39;addressLine1&#39;: str,</span>
+<span class="sd">                    &#39;addressLine2&#39;: str,</span>
+<span class="sd">                    &#39;city&#39;: str,</span>
+<span class="sd">                    &#39;state&#39;: str,</span>
+<span class="sd">                    &#39;zipCode&#39;: str,</span>
+<span class="sd">                    &#39;reasonCode&#39;: str,</span>
+<span class="sd">                    &#39;addressType&#39;: TBD,</span>
+<span class="sd">                    &#39;installType&#39;: TBD,</span>
+<span class="sd">                    &#39;floorToStreetsMap&#39;: {},</span>
+<span class="sd">                    &#39;phoneNumber&#39;: TBD,</span>
+<span class="sd">                    &#39;addressfromAccount&#39;: bool,</span>
+<span class="sd">                    &#39;currentFloorNumber&#39;: TBD,</span>
+<span class="sd">                    &#39;eventCorrelationId&#39;: str,</span>
+<span class="sd">                    &#39;verifyE911Address&#39;: bool,</span>
+<span class="sd">                    &#39;polylines&#39;: {},</span>
+<span class="sd">                    &#39;launchType&#39;: str,</span>
+<span class="sd">                    &#39;apartmentNumberRequired&#39;: bool,</span>
+<span class="sd">                    &#39;floorPlanAvailable&#39;: bool,</span>
+<span class="sd">                    &#39;addressMapStatus&#39;: TBD,</span>
+<span class="sd">                    &#39;maxFloor&#39;: TBD,</span>
+<span class="sd">                    &#39;buildingDetails&#39;: TBD,</span>
+<span class="sd">                    &#39;uberPinEligible&#39;: bool,</span>
+<span class="sd">                    &#39;intersectionCoordinatesLst&#39;: TBD,</span>
+<span class="sd">                    &#39;coveragePercentage&#39;: TBD,</span>
+<span class="sd">                    &#39;equipType&#39;: TBD,</span>
+<span class="sd">                    &#39;addressDescriptorList&#39;: TBD,</span>
+<span class="sd">                    &#39;bundleNames&#39;: TBD,</span>
+<span class="sd">                    &#39;qualified4GHome&#39;: bool,</span>
+<span class="sd">                    &#39;qualifiedCBand&#39;: bool,</span>
+<span class="sd">                    &#39;preOrder5GFlow&#39;: bool,</span>
+<span class="sd">                    &#39;preOrderLaunchDate&#39;: TBD,</span>
+<span class="sd">                    &#39;isExpiredCart&#39;: bool,</span>
+<span class="sd">                    &#39;isStreetSelected&#39;: bool,</span>
+<span class="sd">                    &#39;isRevisitor&#39;: bool,</span>
+<span class="sd">                    &#39;uberPinQualificatioIsRequired&#39;: bool,</span>
+<span class="sd">                    &#39;displayStreetSelection&#39;: bool,</span>
+<span class="sd">                    &#39;mucOfferEligible&#39;: bool,</span>
+<span class="sd">                    &#39;storeSessionId&#39;: str,</span>
+<span class="sd">                    &#39;fiosQualified&#39;: bool,</span>
+<span class="sd">                    &#39;HSI&#39;: bool,</span>
+<span class="sd">                    &#39;fiosResponse&#39;: {</span>
+<span class="sd">                        &#39;meta&#39;: {</span>
+<span class="sd">                            &#39;code&#39;: str,</span>
+<span class="sd">                            &#39;description&#39;: str,</span>
+<span class="sd">                            &#39;timestamp&#39;: str</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &#39;qualification&#39;: {</span>
+<span class="sd">                            &#39;gigqualified&#39;: bool,</span>
+<span class="sd">                            &#39;fiosqualified&#39;: bool,</span>
+<span class="sd">                            &#39;hsiqualified&#39;: bool,</span>
+<span class="sd">                            &#39;posturl&#39;: str,</span>
+<span class="sd">                            &#39;visitId&#39;: str,</span>
+<span class="sd">                            &#39;visitorId&#39;: str,</span>
+<span class="sd">                            &#39;commonLq&#39;: str,</span>
+<span class="sd">                            &#39;lbo&#39;: TBD,</span>
+<span class="sd">                            &#39;captcha&#39;: TBD</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &#39;postValues&#39;: {</span>
+<span class="sd">                            &#39;campaignCode&#39;: str,</span>
+<span class="sd">                            &#39;config&#39;: {</span>
+<span class="sd">                                &#39;addressInfo&#39;: {</span>
+<span class="sd">                                    &#39;addressid&#39;: str,</span>
+<span class="sd">                                    &#39;addressLine1&#39;: str,</span>
+<span class="sd">                                    &#39;addressLine2&#39;: str,</span>
+<span class="sd">                                    &#39;city&#39;: str,</span>
+<span class="sd">                                    &#39;state&#39;: str,</span>
+<span class="sd">                                    &#39;zipCode&#39;: str</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &#39;vendorName&#39;: str,</span>
+<span class="sd">                            &#39;targetUrl&#39;: str</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &#39;qualificationDetails&#39;: {</span>
+<span class="sd">                            &#39;data&#39;: {</span>
+<span class="sd">                                &#39;hoaServiceType&#39;: TBD,</span>
+<span class="sd">                                &#39;qualified&#39;: TBD,</span>
+<span class="sd">                                &#39;services&#39;: TBD,</span>
+<span class="sd">                                &#39;pendingOrder&#39;: TBD,</span>
+<span class="sd">                                &#39;smartCartDetails&#39;: TBD,</span>
+<span class="sd">                                &#39;inService&#39;: TBD,</span>
+<span class="sd">                                &#39;hoaFlag&#39;: TBD,</span>
+<span class="sd">                                &#39;hoaContractNumber&#39;: TBD,</span>
+<span class="sd">                                &#39;isLennarEligible&#39;: TBD,</span>
+<span class="sd">                                &#39;tarCode&#39;: TBD,</span>
+<span class="sd">                                &#39;cpnelg&#39;: TBD,</span>
+<span class="sd">                                &#39;fiosSelfInstall&#39;: TBD,</span>
+<span class="sd">                                &#39;fiosReady&#39;: TBD,</span>
+<span class="sd">                                &#39;quantumEligible&#39;: TBD,</span>
+<span class="sd">                                &#39;parsedAddress&#39;: TBD,</span>
+<span class="sd">                                &#39;fiveG&#39;: bool,</span>
+<span class="sd">                                &#39;addressNotFound&#39;: bool,</span>
+<span class="sd">                                &#39;encryptedAddressFor5G&#39;: TBD,</span>
+<span class="sd">                                &#39;qualified4GHome&#39;: bool,</span>
+<span class="sd">                                &#39;state&#39;: TBD,</span>
+<span class="sd">                                &#39;zip&#39;: TBD,</span>
+<span class="sd">                                &#39;isError&#39;: TBD,</span>
+<span class="sd">                                &#39;wirelessPlanType&#39;: TBD,</span>
+<span class="sd">                                &#39;occupancyType&#39;: TBD</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &#39;multipleAddressMatch&#39;: TBD,</span>
+<span class="sd">                        &#39;parsedAddress&#39;: TBD</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                &#39;errorMap&#39;: TBD,</span>
+<span class="sd">                &#39;statusMessage&#39;: str,</span>
+<span class="sd">                &#39;statusCode&#39;: str</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># home LTE availability is encompassed in this endpoint</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.verizon.com/vfw/v1/check5GAvailability&quot;</span>
+
+        <span class="c1"># the following headers must be provided for the request to succeed</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">}</span>
+
+        <span class="c1"># json parameters for posting to the endpoint</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;address1&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;street&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;zipcode&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;zip&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># post the request and obtain the response in dict form</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="n">url</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+            <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">convert_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Verizon.parse_plan_availability"><a class="viewcode-back" href="../../api.html#ispchecker.verizon.Verizon.parse_plan_availability">[docs]</a>    <span class="k">def</span> <span class="nf">parse_plan_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            response (dict): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># TODO: find reliable way of checking if address is valid</span>
+
+        <span class="c1"># check if 4G LTE home internet is available at address</span>
+        <span class="k">if</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qualified4GHome&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;Available&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;No service&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;addressLine1&quot;</span><span class="p">:</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;addressLine1&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;zipCode&quot;</span><span class="p">:</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;zipCode&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;qualified4GHome&quot;</span><span class="p">:</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;qualified4GHome&quot;</span><span class="p">),</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response_dict</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Joshua Chen.
+      <span class="lastupdated">Last updated on 2022-03-07 00:24:41.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

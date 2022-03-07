@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ispchecker.spectrum &mdash; docs</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/logo-original.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #283618" >
+            <a href="../../index.html" class="icon icon-home"> isp-checker
+            <img src="../../_static/logo-64.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                beta
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manual.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #283618" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">isp-checker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>ispchecker.spectrum</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ispchecker.spectrum</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">ispchecker</span> <span class="kn">import</span> <span class="n">tools</span> <span class="k">as</span> <span class="n">t</span>
+<span class="kn">from</span> <span class="nn">ispchecker.isp</span> <span class="kn">import</span> <span class="n">ISP</span>
+
+
+<div class="viewcode-block" id="Spectrum"><a class="viewcode-back" href="../../api.html#ispchecker.spectrum.Spectrum">[docs]</a><span class="k">class</span> <span class="nc">Spectrum</span><span class="p">(</span><span class="n">ISP</span><span class="p">):</span>
+<div class="viewcode-block" id="Spectrum.main_routine"><a class="viewcode-back" href="../../api.html#ispchecker.spectrum.Spectrum.main_routine">[docs]</a>    <span class="k">def</span> <span class="nf">main_routine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># retrieve address/session response</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_address_and_session_metadata</span><span class="p">()</span>
+
+        <span class="c1"># get dict from response, parse availability, and update self.metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_address_and_session_metadata</span><span class="p">(</span><span class="n">r</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Spectrum.retrieve_address_and_session_metadata"><a class="viewcode-back" href="../../api.html#ispchecker.spectrum.Spectrum.retrieve_address_and_session_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_address_and_session_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+
+<span class="sd">        .. code-block::</span>
+
+<span class="sd">            # (response mapping may be incomplete)</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &#39;transactionId&#39;: str,</span>
+<span class="sd">                &#39;rdofMatchLevel&#39;: str,</span>
+<span class="sd">                &#39;availableForCampaigns&#39;: list,</span>
+<span class="sd">                &#39;reasonCode&#39;: int,</span>
+<span class="sd">                &#39;serviceabilityFlags&#39;: {</span>
+<span class="sd">                    &#39;isPotentialExistingCustomer&#39;: bool,</span>
+<span class="sd">                    &#39;isProspectPendingConnect&#39;: bool,</span>
+<span class="sd">                    &#39;isPendingDisconnect&#39;: bool,</span>
+<span class="sd">                    &#39;hasNoLobsServiceable&#39;: bool,</span>
+<span class="sd">                    &#39;isTenant&#39;: bool,</span>
+<span class="sd">                    &#39;hasOpenWorkOrder&#39;: bool,</span>
+<span class="sd">                    &#39;isOutOfFootprint&#39;: bool,</span>
+<span class="sd">                    &#39;isMultiUnitGTMax&#39;: bool,</span>
+<span class="sd">                    &#39;isMultiUnitGTMinLTMaxPlusOne&#39;: bool,</span>
+<span class="sd">                    &#39;hasMultipleMsos&#39;: bool,</span>
+<span class="sd">                    &#39;isMsoNotFound&#39;: bool,</span>
+<span class="sd">                    &#39;isServiceabilityContinue&#39;: bool,</span>
+<span class="sd">                    &#39;isRepeatNonPay&#39;: bool,</span>
+<span class="sd">                    &#39;is2MNPH1NPD&#39;: bool,</span>
+<span class="sd">                    &#39;isNearbyMatch&#39;: bool,</span>
+<span class="sd">                    &#39;isZip4Match&#39;: bool,</span>
+<span class="sd">                    &#39;isMobileEligible&#39;: bool,</span>
+<span class="sd">                    &#39;isMultiLocation&#39;: bool,</span>
+<span class="sd">                    &#39;isAddressModified&#39;: bool,</span>
+<span class="sd">                    &#39;hasFiberToPremise&#39;: bool,</span>
+<span class="sd">                    &#39;isLocationServiceable&#39;: bool,</span>
+<span class="sd">                    &#39;isNonPayStatus&#39;: bool,</span>
+<span class="sd">                    &#39;isAddressConfirmed&#39;: bool,</span>
+<span class="sd">                    &#39;isSIAeligible&#39;: bool,</span>
+<span class="sd">                    &#39;isSMBCOMPOFF1Eligible&#39;: bool,</span>
+<span class="sd">                    &#39;isCandidateForBulkPilot&#39;: bool</span>
+<span class="sd">                },</span>
+<span class="sd">                &#39;gisColor&#39;: str,</span>
+<span class="sd">                &#39;scrubbedAddress&#39;: {</span>
+<span class="sd">                    &#39;line1&#39;: str,</span>
+<span class="sd">                    &#39;line2&#39;: str,</span>
+<span class="sd">                    &#39;city&#39;: str,</span>
+<span class="sd">                    &#39;territoryCode&#39;: str,</span>
+<span class="sd">                    &#39;zipCode&#39;: str</span>
+<span class="sd">                },</span>
+<span class="sd">                &#39;addresses&#39;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &#39;soloAddressId&#39;: int,</span>
+<span class="sd">                        &#39;line1&#39;: str,</span>
+<span class="sd">                        &#39;line2&#39;: str,</span>
+<span class="sd">                        &#39;city&#39;: str,</span>
+<span class="sd">                        &#39;territoryCode&#39;: str,</span>
+<span class="sd">                        &#39;zipCode&#39;: str,</span>
+<span class="sd">                        &#39;locationKey&#39;: str,</span>
+<span class="sd">                        &#39;locationType&#39;: str,</span>
+<span class="sd">                        &#39;serviceStatus&#39;: str,</span>
+<span class="sd">                        &#39;spcDivisionId&#39;: str,</span>
+<span class="sd">                        &#39;normalized&#39;: bool</span>
+<span class="sd">                    }</span>
+<span class="sd">                ],</span>
+<span class="sd">                &#39;msoCandidates&#39;: {</span>
+<span class="sd">                    &#39;ewsBusinessUnit&#39;: str,</span>
+<span class="sd">                    &#39;g2bBusinessUnit&#39;: str,</span>
+<span class="sd">                    &#39;gisBusinessUnit&#39;: str,</span>
+<span class="sd">                    &#39;defaultMSO&#39;: str</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># spectrum endpoint for obtaining address and session metadata</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://location.spectrum.com/api-v2/svc/serviceability/v2&quot;</span>
+
+        <span class="c1"># the following headers must be provided for the request to succeed</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json, text/plain, */*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Accept-Language&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US,en;q=0.5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Accept-Encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip, deflate, br&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Origin&quot;</span><span class="p">:</span> <span class="s2">&quot;https://location.spectrum.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;keep-alive&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># json parameters for posting to the endpoint</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;line1&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;street&quot;</span><span class="p">),</span>
+                <span class="c1"># &quot;line2&quot;: &lt;-- unused for now</span>
+                <span class="s2">&quot;postalCode&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;zip&quot;</span><span class="p">),</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1"># post the request and return the response</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">convert_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Spectrum.parse_address_and_session_metadata"><a class="viewcode-back" href="../../api.html#ispchecker.spectrum.Spectrum.parse_address_and_session_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">parse_address_and_session_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;placeholder text</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            response (dict): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># get the relevant Spectrum address metadata by looping through the addresses list</span>
+        <span class="c1"># and comparing: address line, city, territory (state), zip</span>
+        <span class="c1"># notes:</span>
+        <span class="c1">#   1. convert relevant elements UPPERCASE for comparison w/ self.address</span>
+        <span class="c1">#   2. ignore last token of line1 to avoid comparing things like &#39;ROAD&#39; and &#39;RD&#39;</span>
+        <span class="c1">#   3. only take first 5 digits of zip codes</span>
+        <span class="n">spectrum_address_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;addresses&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;street&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;territoryCode&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;zip&quot;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;zipCode&quot;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+            <span class="p">):</span>
+
+                <span class="n">spectrum_address_dict</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="c1"># update summary dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;line1&quot;</span><span class="p">:</span> <span class="n">spectrum_address_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line1&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;zipCode&quot;</span><span class="p">:</span> <span class="n">spectrum_address_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;zipCode&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;isLocationServiceable&quot;</span><span class="p">:</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;serviceabilityFlags&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="s2">&quot;isLocationServiceable&quot;</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;locationKey&quot;</span><span class="p">:</span> <span class="n">spectrum_address_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;locationKey&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;serviceStatus&quot;</span><span class="p">:</span> <span class="n">spectrum_address_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;serviceStatus&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># update availability</span>
+        <span class="c1"># isLocationServiceable is misleading:</span>
+        <span class="c1">#   if True, then must also have a locationKey to truly have serviceability</span>
+        <span class="c1">#   if False, then must also NOT have a locationKey to truly NOT have serviceability</span>
+        <span class="c1">#   otherwise, serviceability is indeterminate (website UI throws an error and prompts a customer service call)</span>
+        <span class="k">if</span> <span class="n">spectrum_address_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;locationKey&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">response_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;serviceabilityFlags&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;isLocationServiceable&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;Available&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;Indeterminate&quot;</span>
+        <span class="k">elif</span> <span class="p">(</span>
+            <span class="n">spectrum_address_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line1&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="p">):</span>  <span class="c1"># this means no matching address was found in the response</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;Address not found&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;No service&quot;</span>
+
+        <span class="k">return</span> <span class="n">response_dict</span></div>
+
+<div class="viewcode-block" id="Spectrum.get_offers"><a class="viewcode-back" href="../../api.html#ispchecker.spectrum.Spectrum.get_offers">[docs]</a>    <span class="k">def</span> <span class="nf">get_offers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locationKey</span><span class="p">,</span> <span class="n">transactionId</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        .. admonition:: TODO</span>
+
+<span class="sd">            `This endpoint &lt;https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers&gt;`__</span>
+<span class="sd">            returns a list of offers and internet speeds when provided with a ``serviceLocationId`` query,</span>
+<span class="sd">            and ``session-id`` and ``client-id`` headers.</span>
+
+<span class="sd">            These the query and header inputs correspond to the ``locationKey`` and ``transactionId`` attributes,</span>
+<span class="sd">            respectively, in the response dictionary from</span>
+<span class="sd">            :py:obj:`parse_address_and_session_metadata&lt;ispchecker.main.Spectrum.parse_address_and_session_metadata&gt;`.</span>
+<span class="sd">            This nomenclature inconsistency is a quirk of the Spectrum API.</span>
+
+<span class="sd">            While this endpoint works well in a browser setting, the requests return bad responses when queried</span>
+<span class="sd">            programmatically. This is likely due to session/cookie issues, which have yet to be worked out.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            locationKey (_type_): _description_</span>
+<span class="sd">            transactionId (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.spectrum.com/services/spectrum/buyflow/residential/proxy.api/root-v2/offers&quot;</span>
+
+        <span class="n">querystring</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;serviceLocationId&quot;</span><span class="p">:</span> <span class="n">locationKey</span><span class="p">}</span>
+
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Accept&quot;</span><span class="p">:</span> <span class="s2">&quot;*/*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Accept-Language&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US,en;q=0.5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Accept-Encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip, deflate, br&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;session-id&quot;</span><span class="p">:</span> <span class="n">transactionId</span><span class="p">,</span>
+            <span class="s2">&quot;client-id&quot;</span><span class="p">:</span> <span class="n">transactionId</span><span class="p">,</span>
+            <span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;keep-alive&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">convert_response</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">querystring</span><span class="p">)</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Joshua Chen.
+      <span class="lastupdated">Last updated on 2022-03-07 00:24:41.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
