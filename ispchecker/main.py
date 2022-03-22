@@ -50,7 +50,6 @@ def main():
                 "\n ERROR: prototype interface encountered the following exception:\n"
             )
             [print(f"   {i}") for i in traceback.format_exc().split("\n")]
-            t.print_divider()
 
 
 if __name__ == "__main__":
