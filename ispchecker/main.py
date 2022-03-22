@@ -1,28 +1,56 @@
-import sys
+import traceback
 from ispchecker import tools as t
 from ispchecker.address import Address
 from ispchecker.spectrum import Spectrum
 from ispchecker.centurylink import CenturyLink
 from ispchecker.verizon import Verizon
 
+DIVIDER = (
+    "\n ------------------------------------------------------------------------------ "
+)
+
 
 def main():
 
-    # create a string from the sys args list
-    # the first element in list is the name of the calling function; it is ignored
-    full_address = " ".join(sys.argv[1:])
+    # rudimentary CLI that allows users to start the program and continuously check different addresses
+    while True:
 
-    # instantiate an Address
-    a = Address()
+        print(DIVIDER)
 
-    # load in an address
-    t.print_divider()
-    a.parse_address(full_address)
-    t.print_recursive_dict(a.address)
+        try:
 
-    # check for isp availability
-    a.check_isps([Spectrum(), CenturyLink(), Verizon()])
-    t.print_divider()
+            # gather user input as one string; re-prompt if no input is provided
+            # convert arg to lowercase for input processing
+            arg = ""
+            while len(arg) == 0:
+                arg = input("\n>>> ").lower()
+
+            # exit the program
+            if arg in ("quit", "q"):
+                break
+
+            # check the address (input checking/cleaning routines TBD)
+            else:
+
+                # instantiate an Address
+                a = Address()
+
+                # load in the argument
+                t.print_divider()
+                a.parse_address(arg)
+                t.print_recursive_dict(a.address)
+
+                # check for isp availability
+                a.check_isps([Spectrum(), CenturyLink(), Verizon()])
+
+        except Exception:
+
+            # if an exception was thrown, print the stack trace
+            print(
+                "\n ERROR: prototype interface encountered the following exception:\n"
+            )
+            [print(f"   {i}") for i in traceback.format_exc().split("\n")]
+            t.print_divider()
 
 
 if __name__ == "__main__":
