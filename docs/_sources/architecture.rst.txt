@@ -32,7 +32,7 @@ Methodology
 ===========
 
 The key to directly retrieving ISP serviceability data via API requests lies in figuring out
-*what* API endpoints exist in the first place, and identifying which of those endpoints
+*what* API endpoints exist in the first place, and in identifying *which* of those endpoints
 are required to obtain a list of service plans and internet speeds for a given address.
 
 High-level instructions
