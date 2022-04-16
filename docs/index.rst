@@ -16,14 +16,17 @@ The following ISPs and metadata are currently supported:
 +---------------------------+---------------------+--------------+
 | Internet Service Provider | Availability Status | Plan Details |
 +===========================+=====================+==============+
-| Spectrum                  | Yes                 | Coming soon  |
+| Spectrum                  | Yes                 | Coming soon* |
++---------------------------+---------------------+--------------+
+| AT&T                      | Coming soon         | Coming soon  |
 +---------------------------+---------------------+--------------+
 | CenturyLink               | Yes                 | Yes          |
 +---------------------------+---------------------+--------------+
-| Verizon LTE Home Internet | Yes                 | N/A*         |
+| Verizon LTE Home Internet | Yes                 | N/A**        |
 +---------------------------+---------------------+--------------+
 
-*\*all Verizon LTE Home Internet plans have stated download speeds of 25-50 Mbps*
+*\* virtually all Spectrum connections have options for 200+ Mbps plans*
+*\*\* all Verizon LTE Home Internet plans have stated download speeds of 25-50 Mbps*
 
 Contents
 --------

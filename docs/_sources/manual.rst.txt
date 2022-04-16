@@ -37,6 +37,16 @@ For example::
     ispcheck 123 neutronland road, reactorville, nc 12345
 
 Example
-=======
+^^^^^^^
 
 .. figure:: _images/example1.png
+
+Continuous Input
+^^^^^^^^^^^^^^^^
+
+    The program can also check a series of addresses or listing URLs without having to explicitly execute the ``ispcheck`` command each time.
+
+    To activate the continuous input mode, simply call the ``ispcheck`` command with no further arguments, after which addresses or listing URLs may be entered and checked sequentially.
+    This mode is useful to have open when actively browsing real estate listings.
+
+    Enter ``quit`` or ``q`` to exit the program.
