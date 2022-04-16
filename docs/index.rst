@@ -26,6 +26,7 @@ The following ISPs and metadata are currently supported:
 +---------------------------+---------------------+--------------+
 
 *\* virtually all Spectrum connections have options for 200+ Mbps plans*
+
 *\*\* all Verizon LTE Home Internet plans have stated download speeds of 25-50 Mbps*
 
 Contents
